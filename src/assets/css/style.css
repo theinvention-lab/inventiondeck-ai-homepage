@@ -106,17 +106,20 @@ ul, ol { padding-left: 1.3em; }
 .hero-lead { font-size: 1.15rem; color: var(--ink-2); max-width: 34em; margin-bottom: 28px; }
 .hero-visual { position: relative; height: 460px; }
 @media (min-width: 1240px) { .hero-visual { width: calc(100% + 60px); margin-right: -60px; } }
-.deck-card { position: absolute; width: calc(33.333% - 6px); height: 290px; border-radius: 20px; background: #fff; box-shadow: var(--shadow-lg); padding: 16px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .4s; border: 1px solid rgba(15, 23, 42, .06); }
+.deck-card { position: absolute; width: 40%; height: 290px; border-radius: 20px; background: #fff; box-shadow: var(--shadow-lg); padding: 16px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .4s; border: 1px solid rgba(15, 23, 42, .06); }
 .deck-card .tag { font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; align-self: flex-start; }
 .deck-card h3 { font-size: 1.25rem; margin: 0 0 4px; }
 .deck-card p { font-size: .9rem; color: var(--muted); margin: 0; }
 .deck-card .icon { font-size: 2.6rem; }
-.deck-card.c1 { left: 0; top: 50px; transform: rotate(-8deg); }
-.deck-card.c2 { left: calc(33.333% + 4px); top: 10px; transform: rotate(-1deg); z-index: 2; }
-.deck-card.c3 { right: 0; top: 50px; transform: rotate(8deg); }
+.deck-card.c1 { left: 0; top: 50px; transform: rotate(-6deg); }
+.deck-card.c2 { left: 30%; top: 10px; transform: rotate(-1deg); z-index: 2; }
+.deck-card.c3 { left: 60%; top: 50px; transform: rotate(6deg); z-index: 3; }
+/* 겹치는 카드: 가려지지 않는 왼쪽 영역에만 글이 오도록 */
+.deck-card.c1 > *, .deck-card.c2 > * { max-width: 68%; }
+@media (max-width: 1100px) { .deck-card p { font-size: .8rem; } .deck-card.c1 > *, .deck-card.c2 > * { max-width: 74%; } }
 .hero-visual:hover .c1 { transform: rotate(-11deg) translateX(-8px); }
 .hero-visual:hover .c3 { transform: rotate(11deg) translateX(8px); }
-.ai-bubble { position: absolute; z-index: 3; left: 50%; transform: translateX(-50%); width: max-content; bottom: 0; background: var(--ink); color: #fff; border-radius: 16px; padding: 14px 18px; font-size: .9rem; box-shadow: var(--shadow-lg); max-width: min(340px, 92%); text-align: center; }
+.ai-bubble { position: absolute; z-index: 4; left: 50%; transform: translateX(-50%); width: max-content; bottom: 0; background: var(--ink); color: #fff; border-radius: 16px; padding: 14px 18px; font-size: .9rem; box-shadow: var(--shadow-lg); max-width: min(340px, 92%); text-align: center; }
 .ai-bubble b { color: #fcd34d; }
 
 .t-theme { background: #ede9fe; color: #6d28d9; }
@@ -135,10 +138,11 @@ ul, ol { padding-left: 1.3em; }
 }
 @media (max-width: 560px) {
   .hero-visual { height: 320px; }
-  .deck-card { height: 210px; padding: 12px 10px; border-radius: 14px; }
+  .deck-card { width: calc(33.333% - 6px); height: 210px; padding: 12px 10px; border-radius: 14px; }
+  .deck-card.c1 > *, .deck-card.c2 > * { max-width: none; }
   .deck-card.c1 { left: 0; top: 30px; transform: rotate(-5deg); }
-  .deck-card.c2 { top: 10px; transform: none; }
-  .deck-card.c3 { right: 0; top: 30px; transform: rotate(5deg); }
+  .deck-card.c2 { left: calc(33.333% + 3px); top: 10px; transform: none; }
+  .deck-card.c3 { left: auto; right: 0; top: 30px; transform: rotate(5deg); }
   .deck-card .tag { font-size: .6rem; padding: 2px 7px; letter-spacing: .04em; }
   .deck-card .icon { font-size: 1.6rem; }
   .deck-card h3 { font-size: .95rem; }
@@ -284,9 +288,11 @@ code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; backgro
 .tpl-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
 
 /* ---------- Program tabs ---------- */
-.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--line); margin-bottom: 36px; overflow-x: auto; }
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--line); margin-bottom: 36px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
 .tab { flex-shrink: 0; background: none; border: 0; border-bottom: 3px solid transparent; padding: 14px 18px; font: inherit; font-weight: 700; color: var(--muted); cursor: pointer; margin-bottom: -1px; }
 .tab[aria-selected="true"] { color: var(--brand); border-bottom-color: var(--brand); }
+@media (max-width: 640px) { .tabs { gap: 0; } .tab { flex: 1 1 auto; min-width: 0; padding: 12px 4px; font-size: .9rem; line-height: 1.35; } }
 .tab-panel[hidden] { display: none; }
 .program-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start; }
 @media (max-width: 900px) { .program-grid { grid-template-columns: 1fr; } }
