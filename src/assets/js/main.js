@@ -61,8 +61,15 @@
         if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
       });
     });
-    var fromHash = location.hash && root.querySelector(location.hash + '[role="tab"]');
-    select(fromHash || tabs[0]);
+    function fromHash() {
+      return location.hash && root.querySelector(location.hash + '[role="tab"]');
+    }
+    select(fromHash() || tabs[0]);
+    // 같은 페이지 안에서 #tab-... 링크를 눌렀을 때도 해당 탭으로 전환
+    window.addEventListener('hashchange', function () {
+      var t = fromHash();
+      if (t) { select(t); t.scrollIntoView({ block: 'center' }); }
+    });
   });
 
   // ---------- 양식 ----------

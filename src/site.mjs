@@ -87,9 +87,9 @@ export const footerLinks = [
     items: [
       { label: '베타테스터 신청 · 문의', href: 'contact.html' },
       { label: '피드백 제출하기', href: 'feedback/index.html' },
-      { label: '신규 카드 요청', href: 'feedback/new-card.html' },
-      { label: '카드 오류 제보', href: 'feedback/card-error.html' },
-      { label: '인벤션덱AI 오류 제보', href: 'feedback/app-error.html' },
+      { label: '신규 카드 요청', href: 'feedback/index.html#tab-new-card' },
+      { label: '카드 오류 제보', href: 'feedback/index.html#tab-card-error' },
+      { label: '인벤션덱AI 오류 제보', href: 'feedback/index.html#tab-app-error' },
       { label: '의견 남기기', href: 'feedback/opinion.html' },
     ],
   },

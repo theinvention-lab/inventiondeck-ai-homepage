@@ -7,17 +7,19 @@ nav: feedback
   <div class="container">
     <span class="eyebrow">Feedback</span>
     <h1>피드백 제출하기</h1>
-    <p>안녕하세요! 사용해보신 이 서비스, 어떠셨나요? 짧은 의견 한 줄도 저희에게는 큰 도움이 됩니다! 느낀 점, 불편했던 점, 좋았던 점 모두 자유롭게 남겨주세요 😊</p>
+    <p>안녕하세요! 짧은 의견 한 줄도 저희에게는 큰 도움이 됩니다. 아래에서 남기실 내용의 종류를 선택해주세요.</p>
   </div>
 </section>
 <section class="section-sm" style="padding-top:16px">
-  <div class="container">
-    <div class="grid-3" style="margin-bottom:40px">
-      <a class="card feature" href="{{root}}feedback/new-card.html"><span class="emoji">🃏</span><h3>신규 카드 요청</h3><p class="muted">새로 추가되었으면 하는 카드를 알려주세요.</p></a>
-      <a class="card feature" href="{{root}}feedback/card-error.html"><span class="emoji">🔬</span><h3>카드 오류 제보</h3><p class="muted">카드 내용에 잘못된 정보가 있다면 알려주세요.</p></a>
-      <a class="card feature" href="{{root}}feedback/app-error.html"><span class="emoji">🔭</span><h3>인벤션덱AI 오류 제보</h3><p class="muted">서비스 이용 중 발생한 오류를 알려주세요.</p></a>
+  <div class="container" data-tabs>
+    <div class="tab-pills" role="tablist" aria-label="피드백 종류">
+      <button class="tab-pill" role="tab" id="tab-feedback" aria-controls="panel-feedback"><span aria-hidden="true">📝</span> 피드백</button>
+      <button class="tab-pill" role="tab" id="tab-new-card" aria-controls="panel-new-card"><span aria-hidden="true">🃏</span> 신규 카드 요청</button>
+      <button class="tab-pill" role="tab" id="tab-card-error" aria-controls="panel-card-error"><span aria-hidden="true">🔬</span> 카드 오류 제보</button>
+      <button class="tab-pill" role="tab" id="tab-app-error" aria-controls="panel-app-error"><span aria-hidden="true">🔭</span> 인벤션덱AI 오류 제보</button>
     </div>
-    <div class="form-wrap">
+    <div class="tab-panel form-wrap" role="tabpanel" id="panel-feedback" aria-labelledby="tab-feedback">
+      <p class="panel-desc">사용해보신 이 서비스, 어떠셨나요? 느낀 점, 불편했던 점, 좋았던 점 모두 자유롭게 남겨주세요 😊</p>
     <form class="form-card" data-form="feedback" data-title="사용 피드백" novalidate>
       <fieldset class="field" data-label="1. 어떤 기능을 가장 많이 사용하셨나요? (복수 선택 가능)" data-required>
         <legend>1. 어떤 기능을 가장 많이 사용하셨나요? (복수 선택 가능)<span class="req">*</span></legend>
@@ -55,6 +57,81 @@ nav: feedback
         </div>
         <p class="field-error">항목을 선택해주세요.</p>
       </fieldset>
+      <div class="form-actions">
+        <p class="muted"><span style="color:#dc2626">*</span> 필수 입력 항목</p>
+        <button class="btn btn-primary" type="submit">제출하기</button>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+    </div>
+    <div class="tab-panel form-wrap" role="tabpanel" id="panel-new-card" aria-labelledby="tab-new-card" hidden>
+      <p class="panel-desc">인벤션덱에 새로 추가되었으면 하는 카드(타겟, 기술, 트렌드, 수익모델 등)를 제안해주세요.</p>
+    <form class="form-card" data-form="new-card" data-title="신규 카드 요청" novalidate>
+      <div class="field" data-label="요청하는 카드 키워드">
+        <label for="nc-subject">요청하는 카드 키워드<span class="req">*</span></label>
+        <input class="input" id="nc-subject" name="subject" placeholder="예) 시니어 테크, 탄소배출권" required>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="카드가 필요한 이유 / 참고 사례">
+        <label for="nc-body">카드가 필요한 이유 / 참고 사례<span class="req">*</span></label>
+        <textarea class="textarea" id="nc-body" name="body" placeholder="어떤 아이디어 발상에 도움이 될지, 참고할 만한 기업 사례가 있다면 함께 알려주세요." required></textarea>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="회신 받을 이메일">
+        <label for="nc-email">회신 받을 이메일<span class="hint">답변이 필요하신 경우에만 입력해주세요.</span></label>
+        <input class="input" id="nc-email" name="email" type="email" autocomplete="email">
+        <p class="field-error">올바른 이메일 주소를 입력해주세요.</p>
+      </div>
+      <div class="form-actions">
+        <p class="muted"><span style="color:#dc2626">*</span> 필수 입력 항목</p>
+        <button class="btn btn-primary" type="submit">제출하기</button>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+    </div>
+    <div class="tab-panel form-wrap" role="tabpanel" id="panel-card-error" aria-labelledby="tab-card-error" hidden>
+      <p class="panel-desc">카드 설명이나 기업 사례에 잘못된 정보, 오탈자, 오래된 내용이 있다면 알려주세요.</p>
+    <form class="form-card" data-form="card-error" data-title="카드 오류 제보" novalidate>
+      <div class="field" data-label="오류가 있는 카드 이름">
+        <label for="ce-subject">오류가 있는 카드 이름<span class="req">*</span></label>
+        <input class="input" id="ce-subject" name="subject" placeholder="예) Target · MZ세대" required>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="오류 내용">
+        <label for="ce-body">오류 내용<span class="req">*</span></label>
+        <textarea class="textarea" id="ce-body" name="body" placeholder="어떤 부분이 잘못되었는지, 올바른 내용은 무엇인지 알려주세요." required></textarea>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="회신 받을 이메일">
+        <label for="ce-email">회신 받을 이메일<span class="hint">답변이 필요하신 경우에만 입력해주세요.</span></label>
+        <input class="input" id="ce-email" name="email" type="email" autocomplete="email">
+        <p class="field-error">올바른 이메일 주소를 입력해주세요.</p>
+      </div>
+      <div class="form-actions">
+        <p class="muted"><span style="color:#dc2626">*</span> 필수 입력 항목</p>
+        <button class="btn btn-primary" type="submit">제출하기</button>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+    </div>
+    <div class="tab-panel form-wrap" role="tabpanel" id="panel-app-error" aria-labelledby="tab-app-error" hidden>
+      <p class="panel-desc">서비스 이용 중 발생한 오류나 버그를 알려주세요. 빠르게 확인 후 개선하겠습니다.</p>
+    <form class="form-card" data-form="app-error" data-title="인벤션덱AI 오류 제보" novalidate>
+      <div class="field" data-label="오류가 발생한 기능 / 화면">
+        <label for="ae-subject">오류가 발생한 기능 / 화면<span class="req">*</span></label>
+        <input class="input" id="ae-subject" name="subject" placeholder="예) 비즈니스 아이디어 구체화하기 · AI 초안 생성" required>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="오류 상황 설명">
+        <label for="ae-body">오류 상황 설명<span class="req">*</span></label>
+        <textarea class="textarea" id="ae-body" name="body" placeholder="어떤 동작을 했을 때 어떤 문제가 발생했는지, 사용 중인 브라우저/기기와 함께 알려주세요." required></textarea>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="회신 받을 이메일">
+        <label for="ae-email">회신 받을 이메일<span class="hint">답변이 필요하신 경우에만 입력해주세요.</span></label>
+        <input class="input" id="ae-email" name="email" type="email" autocomplete="email">
+        <p class="field-error">올바른 이메일 주소를 입력해주세요.</p>
+      </div>
       <div class="form-actions">
         <p class="muted"><span style="color:#dc2626">*</span> 필수 입력 항목</p>
         <button class="btn btn-primary" type="submit">제출하기</button>

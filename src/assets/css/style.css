@@ -393,3 +393,10 @@ th { background: var(--bg-2); font-weight: 500; white-space: nowrap; }
 /* ---------- 옅은 격자 배경: 홈 히어로, 페이지 상단, 피드백 영역에만 ---------- */
 .hero::before, .page-hero::before, .feedback-band::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(15, 23, 42, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, .05) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 40%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 75% at 50% 40%, #000 30%, transparent 100%); }
 .hero > *, .page-hero > *, .feedback-band > * { position: relative; }
+
+/* ---------- Pill tabs (피드백 페이지) ---------- */
+.tab-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 8px 0 32px; }
+.tab-pill { font: inherit; font-weight: 500; color: var(--ink-2); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 10px 20px; cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
+.tab-pill:hover { border-color: var(--brand); color: var(--brand); }
+.tab-pill[aria-selected="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
+.panel-desc { text-align: center; color: var(--muted); margin-bottom: 20px; }

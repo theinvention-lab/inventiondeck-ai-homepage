@@ -23,7 +23,8 @@ npm run check   # 빌드 + 내부 링크 검사
 | Business Template + 템플릿 6종 | `template/` |
 | 프로그램 소개 + 문의하기(프로그램) | `program.html` (`#program-inquiry`) |
 | 문의하기(베타테스터) | `contact.html` |
-| 피드백 제출하기 / 신규 카드 요청 / 카드 오류 제보 / 인벤션덱AI 오류 제보 / 의견 남기기 | `feedback/` |
+| 피드백 제출하기 / 신규 카드 요청 / 카드 오류 제보 / 인벤션덱AI 오류 제보 | `feedback/index.html` (탭으로 양식 전환, `/feedback#tab-card-error` 등) |
+| 의견 남기기 | `feedback/opinion.html` |
 | 공지사항 | `notice.html` |
 | 양식 제출 완료 / 마감 안내 | `thanks.html?form=…`, `form-closed.html?state=closed` |
 | 서비스이용약관 / 개인정보처리방침 | `terms.html`, `privacy.html` |
