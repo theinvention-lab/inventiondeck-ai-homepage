@@ -117,6 +117,48 @@ function cleanPath(p) {
   return out || '/';
 }
 
+// 홈 첫 접속 인트로: 겹쳐 있던 카드가 펼쳐지며 로고가 나온 뒤 홈이 나타난다.
+// 세션당 한 번만 재생하고, 동작 줄이기 설정 사용자나 JS가 꺼진 환경에서는 건너뛴다.
+const INTRO_HEAD = `<script>
+(function () {
+  var d = document.documentElement, KEY = 'id-intro-seen';
+  try {
+    if (sessionStorage.getItem(KEY) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    sessionStorage.setItem(KEY, '1');
+  } catch (e) { return; }
+  d.classList.add('intro-on', 'intro-lock');
+  function end() {
+    d.classList.remove('intro-lock');
+    var el = document.getElementById('intro');
+    if (el) el.remove();
+  }
+  var t = setTimeout(end, 3400);
+  function skip() { clearTimeout(t); d.classList.remove('intro-on'); end(); }
+  addEventListener('DOMContentLoaded', function () {
+    var el = document.getElementById('intro');
+    if (el) el.addEventListener('click', skip);
+  });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') skip(); }, { once: true });
+})();
+</script>
+`;
+
+const INTRO_CARDS = [
+  ['theme', 'Theme', '🏥', '헬스케어'],
+  ['target', 'Target', '🧑‍💻', 'MZ세대'],
+  ['trend', 'Trend', '🌱', '친환경'],
+  ['tech', 'Tech', '🤖', '생성형 AI'],
+  ['feature', 'Feature', '🤝', '커뮤니티'],
+  ['revenue', 'Revenue', '🔁', '구독 모델'],
+];
+const INTRO_MARKUP = `<div class="intro" id="intro" aria-hidden="true" title="클릭하면 건너뜁니다">
+  <div class="intro-stage">
+${INTRO_CARDS.map(([k, tag, icon, name], i) => `    <div class="intro-card ic${i + 1}"><span class="tag t-${k}">${tag}</span><span class="icon">${icon}</span><b>${name}</b></div>`).join('\n')}
+    <img class="intro-logo" src="/assets/img/logo.png" alt="" width="149" height="68">
+  </div>
+</div>
+`;
+
 function layout({ meta, body, rel }) {
   const href = rel.split(path.sep).join('/');
   // 모든 링크는 루트 기준 절대경로(/...)로 출력하고, .html 은 아래 cleanUrl 에서 제거한다.
@@ -149,9 +191,9 @@ function layout({ meta, body, rel }) {
 <link rel="stylesheet" href="{{root}}assets/css/style.css">
 <script src="{{root}}assets/js/config.js" defer></script>
 <script src="{{root}}assets/js/main.js" defer></script>
-</head>
+${meta.intro ? INTRO_HEAD : ''}</head>
 <body class="${meta.bodyClass || ''}">
-${header(meta.nav)}
+${meta.intro ? INTRO_MARKUP : ''}${header(meta.nav)}
 <main id="main">
 ${main}
 </main>

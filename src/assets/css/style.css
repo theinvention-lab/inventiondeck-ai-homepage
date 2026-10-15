@@ -400,3 +400,53 @@ th { background: var(--bg-2); font-weight: 500; white-space: nowrap; }
 .tab-pill:hover { border-color: var(--brand); color: var(--brand); }
 .tab-pill[aria-selected="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
 .panel-desc { text-align: center; color: var(--muted); margin-bottom: 20px; }
+
+/* ---------- 첫 접속 인트로 (홈) ---------- */
+.intro { display: none; }
+.intro-on .intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; cursor: pointer; overflow: hidden;
+  background: radial-gradient(900px 500px at 80% 0%, rgba(245, 158, 11, .10), transparent 60%), radial-gradient(900px 600px at 0% 100%, rgba(240, 0, 45, .08), transparent 60%), #fff;
+  animation: introOut .6s cubic-bezier(.7, 0, .3, 1) 2.75s forwards; }
+.intro-on .intro::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(15, 23, 42, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, .05) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 70%); mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 70%); }
+.intro-lock, .intro-lock body { overflow: hidden; }
+.intro-stage { --Sx: 210px; --Sy: 200px; position: relative; width: 0; height: 0; }
+.intro-card { --w: 124px; --h: 168px; position: absolute; left: 0; top: 0; width: var(--w); height: var(--h); margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2); background: #fff; border: 1px solid rgba(15, 23, 42, .08); border-radius: 16px; box-shadow: 0 14px 34px rgba(60, 10, 20, .14); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; opacity: 0;
+  animation: introCard 2.2s cubic-bezier(.65, 0, .25, 1) forwards; }
+.intro-card .tag { font-size: .62rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; align-self: flex-start; }
+.intro-card .icon { font-size: 1.9rem; line-height: 1; }
+.intro-card b { font-size: .98rem; }
+/* 쌓여 있을 때의 기울기(--r0), 섞일 때 흔들림(--jx), 펼쳐진 뒤 위치(--ux, --uy)와 각도(--r) */
+.ic1 { --r0: -7deg; --jx: -46px; --ux: -1.0; --uy: -.95; --r: -14deg; animation-delay: .00s; }
+.ic2 { --r0: 5deg;  --jx: 40px;  --ux: -1.3; --uy: 0;  --r: -6deg;  animation-delay: .04s; }
+.ic3 { --r0: -3deg; --jx: -30px; --ux: -1.0; --uy: .95;  --r: 5deg;   animation-delay: .08s; }
+.ic4 { --r0: 8deg;  --jx: 52px;  --ux: 1.0; --uy: -.95; --r: 14deg;  animation-delay: .12s; }
+.ic5 { --r0: -9deg; --jx: -40px; --ux: 1.3; --uy: 0;  --r: 6deg;   animation-delay: .16s; }
+.ic6 { --r0: 3deg;  --jx: 34px;  --ux: 1.0; --uy: .95;  --r: -5deg;  animation-delay: .20s; }
+@keyframes introCard {
+  0%   { opacity: 0; transform: translate(0, 40px) rotate(var(--r0)) scale(.9); }
+  12%  { opacity: 1; transform: translate(0, 0) rotate(var(--r0)); }
+  22%  { transform: translate(var(--jx), -6px) rotate(calc(var(--r0) * -1.4)); }
+  32%  { transform: translate(0, 0) rotate(var(--r0)); }
+  40%  { transform: translate(calc(var(--jx) * -.6), 4px) rotate(calc(var(--r0) * 1.6)); }
+  48%  { transform: translate(0, 0) rotate(var(--r0)); }
+  72%, 100% { opacity: 1; transform: translate(calc(var(--ux) * var(--Sx)), calc(var(--uy) * var(--Sy))) rotate(var(--r)); }
+}
+.intro-logo { position: absolute; left: 0; top: 0; max-width: none; width: 190px; height: auto; transform: translate(-50%, -50%) scale(.6); opacity: 0; animation: introLogo .7s cubic-bezier(.2, .8, .2, 1) 1.45s forwards; }
+@keyframes introLogo { to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+@keyframes introOut { to { opacity: 0; visibility: hidden; transform: scale(1.04); } }
+@media (max-width: 640px) {
+  .intro-stage { --Sx: 112px; --Sy: 124px; }
+  .intro-card { --w: 82px; --h: 114px; padding: 8px; border-radius: 12px; }
+  .intro-card .tag { font-size: .5rem; padding: 1px 5px; letter-spacing: .02em; }
+  .intro-card .icon { font-size: 1.3rem; }
+  .intro-card b { font-size: .74rem; }
+  .intro-logo { width: 128px; }
+}
+/* 인트로가 끝날 때 히어로가 이어서 나타남 */
+.intro-on .hero-grid > div:first-child > * { animation: introUp .8s cubic-bezier(.2, .7, .2, 1) both; }
+.intro-on .hero-grid > div:first-child > :nth-child(1) { animation-delay: 2.95s; }
+.intro-on .hero-grid > div:first-child > :nth-child(2) { animation-delay: 3.08s; }
+.intro-on .hero-grid > div:first-child > :nth-child(3) { animation-delay: 3.2s; }
+.intro-on .hero-visual { animation: introUp .9s cubic-bezier(.2, .7, .2, 1) 3.1s both; }
+.intro-on .floating-cta { animation: introCta .6s ease 3.4s both; }
+@keyframes introUp { from { opacity: 0; transform: translateY(28px); } }
+@keyframes introCta { from { opacity: 0; transform: translate(-50%, 20px); } }
