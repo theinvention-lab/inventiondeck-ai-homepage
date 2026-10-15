@@ -45,10 +45,8 @@ function header(current) {
 <header class="site-header" data-header>
   <div class="container header-inner">
     <a class="brand" href="{{root}}index.html" aria-label="${site.name} 홈">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="28" height="28"><rect x="3" y="6" width="18" height="22" rx="3" fill="var(--brand-2)"/><rect x="10" y="3" width="18" height="22" rx="3" fill="var(--brand)"/><path d="M19 9.5l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#fff"/></svg>
-      </span>
-      <span class="brand-name">InventionDeck <b>AI</b></span>
+      <img class="brand-logo" src="{{root}}assets/img/logo.png" alt="InventionDeck" width="88" height="40">
+      <span class="brand-ai">AI</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
       <span class="sr-only">메뉴 열기</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -73,7 +71,7 @@ function footer() {
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-about">
-      <a class="brand brand-footer" href="{{root}}index.html"><span class="brand-name">InventionDeck <b>AI</b></span></a>
+      <a class="brand brand-footer" href="{{root}}index.html"><img class="brand-logo" src="{{root}}assets/img/logo.png" alt="InventionDeck AI" width="88" height="40"></a>
       <p>카드로 발상하고, AI로 확장하고, 템플릿으로 구체화하는 비즈니스 아이디에이션 플랫폼</p>
       <p class="footer-company">${site.company} · 대표 ${site.ceo}<br>문의 <a href="mailto:${site.email}">${site.email}</a></p>
     </div>
@@ -141,7 +139,7 @@ function layout({ meta, body, rel }) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${site.url}/${href === 'index.html' ? '' : href}">
-<meta name="theme-color" content="#4338ca">
+<meta name="theme-color" content="#f0002d">
 <link rel="icon" href="{{root}}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
