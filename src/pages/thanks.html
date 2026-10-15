@@ -1,0 +1,22 @@
+---
+title: 제출 완료
+description: 양식 제출이 완료되었습니다.
+---
+<section class="status-page">
+  <div data-variants="form">
+    <div data-when="feedback">
+      <div class="icon" aria-hidden="true">🙌🏻</div>
+      <h1>소중한 답변 감사합니다!</h1>
+      <p>See you next time</p>
+    </div>
+    <div data-when="*">
+      <div class="icon" aria-hidden="true">✅</div>
+      <h1>Thank you for submitting the form!</h1>
+      <p>문의가 정상적으로 접수되었습니다. 확인 후 빠르게 연락드리겠습니다.<br>See you next time</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="{{root}}index.html">홈으로 돌아가기</a>
+      <a class="btn btn-ghost" href="{{root}}guide/index.html">사용 가이드 보기</a>
+    </div>
+  </div>
+</section>

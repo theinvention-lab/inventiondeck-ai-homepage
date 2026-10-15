@@ -1,0 +1,66 @@
+---
+title: 피드백 제출하기
+description: 인벤션덱AI를 사용해보신 경험을 들려주세요. 짧은 의견 한 줄도 큰 도움이 됩니다.
+nav: feedback
+---
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Feedback</span>
+    <h1>피드백 제출하기</h1>
+    <p>안녕하세요! 사용해보신 이 서비스, 어떠셨나요? 짧은 의견 한 줄도 저희에게는 큰 도움이 됩니다! 느낀 점, 불편했던 점, 좋았던 점 모두 자유롭게 남겨주세요 😊</p>
+  </div>
+</section>
+<section class="section-sm" style="padding-top:16px">
+  <div class="container">
+    <div class="grid-3" style="margin-bottom:40px">
+      <a class="card feature" href="{{root}}feedback/new-card.html"><span class="emoji">🃏</span><h3>신규 카드 요청</h3><p class="muted">새로 추가되었으면 하는 카드를 알려주세요.</p></a>
+      <a class="card feature" href="{{root}}feedback/card-error.html"><span class="emoji">🔬</span><h3>카드 오류 제보</h3><p class="muted">카드 내용에 잘못된 정보가 있다면 알려주세요.</p></a>
+      <a class="card feature" href="{{root}}feedback/app-error.html"><span class="emoji">🔭</span><h3>인벤션덱AI 오류 제보</h3><p class="muted">서비스 이용 중 발생한 오류를 알려주세요.</p></a>
+    </div>
+    <div class="form-wrap">
+    <form class="form-card" data-form="feedback" data-title="사용 피드백" novalidate>
+      <fieldset class="field" data-label="1. 어떤 기능을 가장 많이 사용하셨나요? (복수 선택 가능)" data-required>
+        <legend>1. 어떤 기능을 가장 많이 사용하셨나요? (복수 선택 가능)<span class="req">*</span></legend>
+        <div class="choices">
+          <label class="choice"><input type="checkbox" name="features" value="카드 살펴보기 · 카드덱"><span>카드 살펴보기 · 카드덱</span></label>
+          <label class="choice"><input type="checkbox" name="features" value="AI 아이디어 생성"><span>AI 아이디어 생성</span></label>
+          <label class="choice"><input type="checkbox" name="features" value="비즈니스 템플릿 (Idea Builder)"><span>비즈니스 템플릿 (Idea Builder)</span></label>
+          <label class="choice"><input type="checkbox" name="features" value="사업계획서 · IR Deck 작성"><span>사업계획서 · IR Deck 작성</span></label>
+        </div>
+        <p class="field-error">항목을 선택해주세요.</p>
+      </fieldset>
+      <div class="field" data-label="2. 가장 인상 깊었던 점">
+        <label for="f-good">2. 사용하시면서 어떤 점이 가장 인상 깊었나요?<span class="req">*</span></label>
+        <textarea class="textarea" id="f-good" name="good" required></textarea>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="3. 불편하거나 아쉬웠던 점">
+        <label for="f-bad">3. 불편하거나 아쉬웠던 점이 있다면 솔직하게 작성해주세요!<span class="req">*</span></label>
+        <textarea class="textarea" id="f-bad" name="bad" required></textarea>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="4. 있으면 좋을 기능">
+        <label for="f-wish">4. 이런게 있으면 더 좋을 것 같다! 싶은 기능이 있다면 작성해주세요. (선택)</label>
+        <textarea class="textarea" id="f-wish" name="wish"></textarea>
+      </div>
+      <div class="field" data-label="5. 추천하고 싶은 대상">
+        <label for="f-rec">5. 주위에 서비스를 추천하고 싶은 대상이 있다면?<span class="hint">ex. 창업 준비 중인 친구, 스타트업 대표 등</span></label>
+        <input class="input" id="f-rec" name="recommend">
+      </div>
+      <fieldset class="field" data-label="6. 추후에 다시 사용하실 의향이 있으신가요?" data-required>
+        <legend>6. 추후에 다시 사용하실 의향이 있으신가요?<span class="req">*</span></legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="again" value="네, 다시 사용할 거예요"><span>네, 다시 사용할 거예요</span></label>
+          <label class="choice"><input type="radio" name="again" value="아니요, 잘 모르겠어요"><span>아니요, 잘 모르겠어요</span></label>
+        </div>
+        <p class="field-error">항목을 선택해주세요.</p>
+      </fieldset>
+      <div class="form-actions">
+        <p class="muted"><span style="color:#dc2626">*</span> 필수 입력 항목</p>
+        <button class="btn btn-primary" type="submit">제출하기</button>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+    </div>
+  </div>
+</section>

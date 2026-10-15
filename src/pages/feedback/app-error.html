@@ -1,0 +1,39 @@
+---
+title: 인벤션덱AI 오류 제보
+description: 서비스 이용 중 발생한 오류나 버그를 알려주세요. 빠르게 확인 후 개선하겠습니다.
+nav: feedback
+---
+<section class="page-hero">
+  <div class="container">
+    <p class="breadcrumb"><a href="{{root}}feedback/index.html">피드백</a> › 인벤션덱AI 오류 제보</p>
+    <span class="eyebrow">Feedback</span>
+    <h1>🔭 인벤션덱AI 오류 제보</h1>
+    <p>서비스 이용 중 발생한 오류나 버그를 알려주세요. 빠르게 확인 후 개선하겠습니다.</p>
+  </div>
+</section>
+<section class="section-sm" style="padding-top:16px">
+  <div class="container form-wrap">
+    <form class="form-card" data-form="app-error" data-title="인벤션덱AI 오류 제보" novalidate>
+      <div class="field" data-label="오류가 발생한 기능 / 화면">
+        <label for="b-subject">오류가 발생한 기능 / 화면<span class="req">*</span></label>
+        <input class="input" id="b-subject" name="subject" placeholder="예) 비즈니스 아이디어 구체화하기 · AI 초안 생성" required>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="오류 상황 설명">
+        <label for="b-body">오류 상황 설명<span class="req">*</span></label>
+        <textarea class="textarea" id="b-body" name="body" placeholder="어떤 동작을 했을 때 어떤 문제가 발생했는지, 사용 중인 브라우저/기기와 함께 알려주세요." required></textarea>
+        <p class="field-error">내용을 입력해주세요.</p>
+      </div>
+      <div class="field" data-label="회신 받을 이메일">
+        <label for="b-email">회신 받을 이메일<span class="hint">답변이 필요하신 경우에만 입력해주세요.</span></label>
+        <input class="input" id="b-email" name="email" type="email" autocomplete="email">
+        <p class="field-error">올바른 이메일 주소를 입력해주세요.</p>
+      </div>
+      <div class="form-actions">
+        <p class="muted"><span style="color:#dc2626">*</span> 필수 입력 항목</p>
+        <button class="btn btn-primary" type="submit">제출하기</button>
+      </div>
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
