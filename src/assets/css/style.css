@@ -382,6 +382,6 @@ th { background: var(--bg-2); font-weight: 700; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 
 /* ---------- Floating CTA (home) ---------- */
-.floating-cta { position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 60; display: inline-flex; align-items: center; gap: 8px; background: var(--brand); color: #fff; font-weight: 800; font-size: 1.05rem; padding: 16px 40px; border-radius: 999px; box-shadow: 0 10px 30px rgba(240, 0, 45, .35); text-decoration: none !important; transition: background .15s, transform .15s; }
+.floating-cta { position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 60; display: inline-flex; align-items: center; gap: 8px; background: var(--brand); color: #fff; font-weight: 800; font-size: 1rem; padding: 10px 36px; border-radius: 999px; box-shadow: 0 10px 30px rgba(240, 0, 45, .35); text-decoration: none !important; transition: background .15s, transform .15s; }
 .floating-cta:hover { background: var(--brand-ink); transform: translateX(-50%) translateY(-2px); }
 .has-floating-cta .site-footer { padding-bottom: 110px; }
