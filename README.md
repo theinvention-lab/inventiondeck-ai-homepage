@@ -14,7 +14,9 @@ npm run check   # 빌드 + 내부 링크 검사
 - `src/assets/` — CSS / JS / 아이콘
 - `build.mjs` — 공통 헤더·푸터·가이드 사이드바를 입혀 `dist/`로 출력
 
-| 원본 페이지 | 경로 |
+주소에는 `.html`이 붙지 않습니다(예: `/guide/cards`). 빌드할 때 링크에서 `.html`을 빼고, Vercel의 `cleanUrls` 설정이 `/guide/cards` 요청에 `guide/cards.html` 파일을 보여줍니다.
+
+| 원본 페이지 | 경로 (소스 파일) |
 |---|---|
 | Home | `index.html` |
 | InventionDeck Guide + 하위 14개 | `guide/` |
@@ -32,7 +34,7 @@ npm run check   # 빌드 + 내부 링크 검사
 
 ## 배포
 `main` 브랜치에 푸시하면 `.github/workflows/deploy.yml`이 GitHub Pages로 배포합니다(저장소 Settings → Pages → Source: GitHub Actions).
-커스텀 도메인을 쓰려면 `src/site.mjs`의 `cname`을 `inventiondeck.kr`로 설정하세요.
+커스텀 도메인을 쓰려면 `src/site.mjs`의 `cname`을 `inventiondeck.kr`로 설정하세요. 링크가 `/`로 시작하는 절대경로라서, `사용자.github.io/저장소명/` 같은 하위 경로가 아니라 도메인 최상위에 배포해야 합니다.
 
 ## 참고
 - 이미지는 원본 slashpage CDN(upload.cafenono.com) 주소를 그대로 사용합니다. 불러오지 못하면 대체 박스가 표시됩니다. 장기 운영 시 `src/assets/img/`로 옮기는 것을 권장합니다.

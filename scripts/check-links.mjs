@@ -24,8 +24,12 @@ for (const file of files) {
     if (/^(https?:|mailto:|tel:|data:|\/\/)/.test(url)) continue;
     const [p, hash] = url.split('#');
     const clean = p.split('?')[0];
-    const target = clean ? path.resolve(path.dirname(file), clean) : file;
-    try { await access(target); } catch { console.log(`✗ ${path.relative(DIST, file)} → ${url}`); bad++; continue; }
+    const base = !clean ? file : clean.startsWith('/') ? path.join(DIST, clean) : path.resolve(path.dirname(file), clean);
+    let target = null;
+    for (const c of [base, base + '.html', path.join(base, 'index.html')]) {
+      try { await access(c); if (!c.endsWith(path.sep) && !(await readdir(c).then(() => true, () => false))) { target = c; break; } } catch {}
+    }
+    if (!target) { console.log(`✗ ${path.relative(DIST, file)} → ${url}`); bad++; continue; }
     if (hash && target.endsWith('.html') && !(await htmlOf(target)).includes(`id="${hash}"`)) {
       console.log(`✗ ${path.relative(DIST, file)} → ${url} (앵커 없음)`); bad++;
     }

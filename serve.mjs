@@ -9,14 +9,18 @@ const PORT = Number(process.env.PORT) || 4173;
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.ico': 'image/x-icon' };
 
 createServer(async (req, res) => {
-  let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-  if (p.endsWith('/')) p += 'index.html';
-  const file = path.join(DIST, path.normalize(p));
-  if (!file.startsWith(DIST)) return res.writeHead(403).end();
+  const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  const base = path.join(DIST, path.normalize(p));
+  if (!base.startsWith(DIST)) return res.writeHead(403).end();
+  // Vercel cleanUrls 와 동일하게: /guide → guide/index.html, /terms → terms.html
+  let file = base;
+  for (const c of [base, base + '.html', path.join(base, 'index.html')]) {
+    if (await stat(c).then((st) => st.isFile(), () => false)) { file = c; break; }
+  }
   try {
-    if ((await stat(file)).isDirectory()) return res.writeHead(301, { Location: p + '/' }).end();
+    const body = await readFile(file);
     res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] || 'application/octet-stream' });
-    res.end(await readFile(file));
+    res.end(body);
   } catch {
     res.writeHead(404, { 'Content-Type': TYPES['.html'] });
     res.end(await readFile(path.join(DIST, '404.html')).catch(() => 'Not found'));

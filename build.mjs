@@ -112,10 +112,16 @@ function guidePager(currentHref) {
   </nav>`;
 }
 
+// /guide/index.html → /guide, /terms.html → /terms, /index.html → /
+function cleanPath(p) {
+  const out = p.replace(/\.html$/, '').replace(/\/index$/, '');
+  return out || '/';
+}
+
 function layout({ meta, body, rel }) {
   const href = rel.split(path.sep).join('/');
-  const depth = href.split('/').length - 1;
-  const root = depth ? '../'.repeat(depth) : '';
+  // 모든 링크는 루트 기준 절대경로(/...)로 출력하고, .html 은 아래 cleanUrl 에서 제거한다.
+  const root = '/';
   const title = meta.title ? `${meta.title} | ${site.name}` : `${site.name} — ${site.tagline}`;
   const desc = meta.description || site.description;
 
@@ -137,7 +143,7 @@ function layout({ meta, body, rel }) {
 <meta property="og:site_name" content="${site.name}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:url" content="${site.url}/${href === 'index.html' ? '' : href}">
+<meta property="og:url" content="${site.url}${cleanPath('/' + href)}">
 <meta name="theme-color" content="#f0002d">
 <link rel="icon" href="{{root}}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -154,7 +160,10 @@ ${footer()}
 </body>
 </html>
 `;
-  return html.replaceAll('{{root}}', root).replaceAll('{{email}}', site.email);
+  return html
+    .replaceAll('{{root}}', root)
+    .replaceAll('{{email}}', site.email)
+    .replace(/href="(\/[^"#?]*?)\.html([?#][^"]*)?"/g, (_, p, rest = '') => `href="${cleanPath(p + '.html')}${rest}"`);
 }
 
 async function build() {

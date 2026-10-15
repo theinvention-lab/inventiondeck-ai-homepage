@@ -73,7 +73,7 @@
   document.querySelectorAll('form[data-form]').forEach(function (form) {
     var key = form.getAttribute('data-form');
     if ((cfg.closedForms || []).indexOf(key) !== -1) {
-      location.replace(root + 'form-closed.html?state=closed');
+      location.replace(root + 'form-closed?state=closed');
       return;
     }
     var status = form.querySelector('[data-form-status]');
@@ -126,7 +126,7 @@
         return;
       }
       var data = collect();
-      var thanks = root + 'thanks.html?form=' + encodeURIComponent(key);
+      var thanks = root + 'thanks?form=' + encodeURIComponent(key);
       var title = form.getAttribute('data-title') || '문의하기';
       var submit = form.querySelector('[type="submit"]');
 
