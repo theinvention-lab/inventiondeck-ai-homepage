@@ -46,7 +46,6 @@ function header(current) {
   <div class="container header-inner">
     <a class="brand" href="{{root}}index.html" aria-label="${site.name} 홈">
       <img class="brand-logo" src="{{root}}assets/img/logo.png" alt="InventionDeck" width="88" height="40">
-      <span class="brand-ai">AI</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
       <span class="sr-only">메뉴 열기</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -141,8 +140,7 @@ function layout({ meta, body, rel }) {
 <meta property="og:url" content="${site.url}/${href === 'index.html' ? '' : href}">
 <meta name="theme-color" content="#f0002d">
 <link rel="icon" href="{{root}}assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="{{root}}assets/css/style.css">
 <script src="{{root}}assets/js/config.js" defer></script>
 <script src="{{root}}assets/js/main.js" defer></script>
