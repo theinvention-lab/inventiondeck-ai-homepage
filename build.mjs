@@ -52,7 +52,6 @@ function header(current) {
     </button>
     <nav id="site-nav" class="site-nav" aria-label="주 메뉴" data-nav>
       ${links}
-      <a class="btn btn-primary btn-sm nav-cta" href="{{root}}contact.html">베타테스터 신청</a>
     </nav>
   </div>
 </header>`;
