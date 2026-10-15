@@ -37,3 +37,6 @@ npm run check   # 빌드 + 내부 링크 검사
 ## 참고
 - 이미지는 원본 slashpage CDN(upload.cafenono.com) 주소를 그대로 사용합니다. 불러오지 못하면 대체 박스가 표시됩니다. 장기 운영 시 `src/assets/img/`로 옮기는 것을 권장합니다.
 - 원본 수집본에 선택지 문구가 없던 양식 항목(choice)은 맥락에 맞게 작성했습니다. 실제 문구에 맞게 수정하세요.
+
+### Vercel
+`vercel.json`에 빌드 설정이 들어 있어 저장소를 연결하면 그대로 배포됩니다(빌드 `npm run build`, 출력 폴더 `dist`).
