@@ -35,8 +35,6 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body { margin: 0; font-family: var(--font); color: var(--ink); background: radial-gradient(1200px 700px at 100% -10%, rgba(240, 0, 45, .06), transparent 60%), radial-gradient(1000px 700px at -10% 40%, rgba(245, 158, 11, .06), transparent 60%), linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%) fixed; line-height: 1.7; word-break: keep-all; overflow-wrap: break-word; }
 img { max-width: 100%; height: auto; display: block; }
-/* 옅은 격자 배경 */
-body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(rgba(15, 23, 42, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, .045) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 40%, transparent 100%); mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 40%, transparent 100%); }
 a { color: var(--brand); text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1, h2, h3, h4 { font-weight: 500; line-height: 1.3; margin: 0 0 .5em; letter-spacing: -0.02em; text-wrap: balance; }
@@ -194,7 +192,7 @@ ul, ol { padding-left: 1.3em; }
 .plan .target { font-size: .9rem; color: var(--ink-2); margin-bottom: 18px; }
 
 /* ---------- CTA band ---------- */
-.feedback-band { background: linear-gradient(135deg, rgba(255, 241, 243, .85), rgba(255, 255, 255, .6) 55%, rgba(255, 247, 237, .85)); border-top: 1px solid #fde2e6; border-bottom: 1px solid #fde2e6; padding: 88px 0; }
+.feedback-band { position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(255, 241, 243, .85), rgba(255, 255, 255, .6) 55%, rgba(255, 247, 237, .85)); border-top: 1px solid #fde2e6; border-bottom: 1px solid #fde2e6; padding: 88px 0; }
 .feedback-band h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
 .feedback-band p { color: var(--muted); margin: 0 auto 32px; max-width: 34em; }
 .feedback-band .btn-light { color: var(--ink-2); border-color: var(--line); box-shadow: var(--shadow); }
@@ -203,7 +201,7 @@ ul, ol { padding-left: 1.3em; }
 .feedback-btns .btn { padding: .9em 1.4em; }
 
 /* ---------- Page hero ---------- */
-.page-hero { background: linear-gradient(180deg, rgba(255, 241, 243, .7), transparent); padding: 72px 0 48px; }
+.page-hero { position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(255, 241, 243, .7), transparent); padding: 72px 0 48px; }
 .page-hero h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 500; }
 .page-hero p { color: var(--ink-2); font-size: 1.1rem; max-width: 46em; }
 .breadcrumb { font-size: .88rem; color: var(--muted); margin-bottom: 12px; }
@@ -391,3 +389,7 @@ th { background: var(--bg-2); font-weight: 500; white-space: nowrap; }
 .floating-cta { position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 60; display: inline-flex; align-items: center; gap: 8px; background: var(--brand); color: #fff; font-weight: 500; font-size: 1rem; padding: 10px 36px; border-radius: 999px; box-shadow: 0 10px 30px rgba(240, 0, 45, .35); text-decoration: none !important; transition: background .15s, transform .15s; }
 .floating-cta:hover { background: var(--brand-ink); transform: translateX(-50%) translateY(-2px); }
 .has-floating-cta .site-footer { padding-bottom: 110px; }
+
+/* ---------- 옅은 격자 배경: 홈 히어로, 페이지 상단, 피드백 영역에만 ---------- */
+.hero::before, .page-hero::before, .feedback-band::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(15, 23, 42, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, .05) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 40%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 75% at 50% 40%, #000 30%, transparent 100%); }
+.hero > *, .page-hero > *, .feedback-band > * { position: relative; }
