@@ -1,5 +1,6 @@
 ---
 nav: home
+bodyClass: has-floating-cta
 ---
 <section class="hero">
   <div class="container hero-grid">
@@ -28,9 +29,6 @@ nav: home
       <h2>한 눈에 알아보기</h2>
       <p>카드 탐색부터 아이디어 생성, 고도화까지. 세 단계로 비즈니스 아이디어를 완성합니다.</p>
     </div>
-    <figure class="overview-img img-frame reveal">
-      <img data-fallback loading="lazy" src="https://upload.cafenono.com/image/slashpageHome/20250728/120226_Uylh0aeoBLqAL9PRS5" alt="인벤션덱AI 서비스 흐름 한 눈에 알아보기">
-    </figure>
     <div class="grid-3">
       <article class="card feature reveal">
         <span class="emoji" aria-hidden="true">🃏</span>
@@ -127,18 +125,14 @@ nav: home
   </div>
 </section>
 
-<section class="section-sm">
-  <div class="container">
-    <div class="cta-band reveal">
-      <div>
-        <h2>카드부터 기능까지,<br>여러분의 피드백이 필요해요!</h2>
-        <p>더 좋은 인벤션덱AI를 함께 만들어주세요. 작은 의견도 큰 도움이 됩니다.</p>
-      </div>
-      <div class="feedback-btns">
-        <a class="btn btn-light" href="{{root}}feedback/card-error.html">🔬 카드 오류 제보하기</a>
-        <a class="btn btn-light" href="{{root}}feedback/app-error.html">🔭 인벤션덱AI 오류 제보하기</a>
-        <a class="btn btn-light" href="{{root}}feedback/opinion.html">📢 새로운 기능 제안하기</a>
-      </div>
+<section class="feedback-band">
+  <div class="container center reveal">
+    <h2>카드부터 기능까지,<br>여러분의 피드백이 필요해요!</h2>
+    <p>더 좋은 인벤션덱AI를 함께 만들어주세요. 작은 의견도 큰 도움이 됩니다.</p>
+    <div class="feedback-btns">
+      <a class="btn btn-light" href="{{root}}feedback/card-error.html">🔬 카드 오류 제보하기</a>
+      <a class="btn btn-light" href="{{root}}feedback/app-error.html">🔭 인벤션덱AI 오류 제보하기</a>
+      <a class="btn btn-light" href="{{root}}feedback/opinion.html">📢 새로운 기능 제안하기</a>
     </div>
   </div>
 </section>
@@ -154,3 +148,5 @@ nav: home
     </div>
   </div>
 </section>
+
+<a class="floating-cta" href="https://app.inventiondeck.kr/" target="_blank" rel="noopener">바로가기 <span aria-hidden="true">→</span></a>
