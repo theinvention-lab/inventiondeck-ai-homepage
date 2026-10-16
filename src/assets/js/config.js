@@ -7,7 +7,7 @@
  *                사용 가능한 키: contact, program, feedback, new-card, card-error, app-error, opinion
  */
 window.SITE_CONFIG = {
-  formEndpoint: '',
+  formEndpoint: 'https://script.google.com/macros/s/AKfycbymcljMDxjziQ7xDziiOFZnSoJPlY_Fy0kTK54tMVPlkI8Uw7jflWZd9ccXblHlSNQQLQ/exec',
   contactEmail: 'contact@roailab.com',
   closedForms: [],
 };
