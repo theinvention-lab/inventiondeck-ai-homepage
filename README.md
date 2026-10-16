@@ -51,8 +51,9 @@ npm run check   # 빌드 + 내부 링크 검사
 - `formEndpoint`: 위 Apps Script 웹 앱 URL. 양식 내용을 JSON 문자열(`text/plain`)로 POST하고 `{"ok": true}` 응답을 받으면 완료 화면으로 이동합니다. 비워두면 메일 앱(mailto)으로 `contactEmail`에 보냅니다.
 - `closedForms`: 마감할 양식 키 목록 → 해당 페이지 접속 시 마감 안내 화면으로 이동.
 
-## 배포
-`main` 브랜치에 푸시하면 `.github/workflows/deploy.yml`이 GitHub Pages로 배포합니다(저장소 Settings → Pages → Source: GitHub Actions).
+## 배포 (GitHub Pages)
+기본 브랜치(`claude/pensive-hamilton-qugp86`) 또는 `main`에 푸시하면 `.github/workflows/deploy.yml`이 빌드·검사 후 GitHub Pages로 배포합니다(저장소 Settings → Pages → Source: **GitHub Actions**).
+GitHub Pages도 `/guide/cards` 같은 주소를 `guide/cards.html`로 연결해 주므로 `.html` 없는 주소가 그대로 동작합니다.
 커스텀 도메인을 쓰려면 `src/site.mjs`의 `cname`을 `inventiondeck.kr`로 설정하세요. 링크가 `/`로 시작하는 절대경로라서, `사용자.github.io/저장소명/` 같은 하위 경로가 아니라 도메인 최상위에 배포해야 합니다.
 
 ## 참고

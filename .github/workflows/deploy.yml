@@ -2,7 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # 저장소 기본 브랜치(현재 claude/pensive-hamilton-qugp86)와 main 에 푸시하면 배포
+    branches: [main, claude/pensive-hamilton-qugp86]
   workflow_dispatch:
 
 permissions:
