@@ -29,8 +29,26 @@ npm run check   # 빌드 + 내부 링크 검사
 | 양식 제출 완료 / 마감 안내 | `thanks.html?form=…`, `form-closed.html?state=closed` |
 | 서비스이용약관 / 개인정보처리방침 | `terms.html`, `privacy.html` |
 
+## 양식 데이터 연결 (Google 스프레드시트)
+홈페이지의 모든 양식(문의하기, 프로그램 문의, 피드백, 신규 카드 요청, 카드 오류 제보, 인벤션덱AI 오류 제보, 의견 남기기)은 하나의 스프레드시트에 양식별 탭으로 저장됩니다.
+
+1. Google 드라이브에서 새 스프레드시트를 만듭니다 (예: `InventionDeck 홈페이지 접수`).
+2. 메뉴 **확장 프로그램 → Apps Script**를 열고, 기본 코드를 지운 뒤 `integrations/google-apps-script.gs` 내용을 붙여넣고 저장합니다.
+   알림 메일을 받으려면 맨 위 `NOTIFY_EMAIL`에 주소를 넣습니다.
+3. **배포 → 새 배포 → 유형 선택(톱니바퀴) → 웹 앱**
+   - 다음 사용자 인증 정보로 실행: **나**
+   - 액세스 권한이 있는 사용자: **모든 사용자**
+4. **배포**를 누르고 권한을 승인합니다. ("Google에서 확인하지 않은 앱" 경고가 나오면 **고급 → (프로젝트 이름)(으)로 이동**)
+5. 표시된 **웹 앱 URL**(`https://script.google.com/macros/s/…/exec`)을 `src/assets/js/config.js`의 `formEndpoint`에 넣고 푸시합니다.
+6. 사이트에서 양식을 하나씩 제출해 시트에 탭과 행이 생기는지 확인합니다.
+
+- 스크립트를 수정한 뒤에는 **배포 → 배포 관리 → 연필(편집) → 버전: 새 버전 → 배포**를 해야 반영됩니다. URL은 그대로입니다.
+- 질문 문구를 바꾸면 시트 오른쪽에 새 열이 추가되고, 기존 열은 그대로 남습니다.
+- 알림 메일은 Gmail 계정 기준 하루 약 100건까지 보낼 수 있습니다(Google Workspace는 더 많음).
+- 숨김 칸으로 간단한 스팸 봇을 거르고, `=`·`+`·`-`·`@`로 시작하는 값은 수식으로 실행되지 않게 처리합니다.
+
 ## 양식 설정 (`src/assets/js/config.js`)
-- `formEndpoint`: JSON POST를 받을 주소(Formspree, Google Apps Script 등). 비워두면 메일 앱(mailto)으로 `contactEmail`에 보냅니다.
+- `formEndpoint`: 위 Apps Script 웹 앱 URL. 양식 내용을 JSON 문자열(`text/plain`)로 POST하고 `{"ok": true}` 응답을 받으면 완료 화면으로 이동합니다. 비워두면 메일 앱(mailto)으로 `contactEmail`에 보냅니다.
 - `closedForms`: 마감할 양식 키 목록 → 해당 페이지 접속 시 마감 안내 화면으로 이동.
 
 ## 배포

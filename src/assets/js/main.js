@@ -85,6 +85,13 @@
     }
     var status = form.querySelector('[data-form-status]');
 
+    // 스팸 봇 방지용 숨김 칸: 사람에게는 보이지 않고, 봇이 채우면 전송하지 않는다.
+    var trap = document.createElement('input');
+    trap.type = 'text'; trap.name = 'website'; trap.tabIndex = -1; trap.autocomplete = 'off';
+    trap.setAttribute('aria-hidden', 'true');
+    trap.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;';
+    form.appendChild(trap);
+
     function fieldsOf() { return Array.prototype.slice.call(form.querySelectorAll('.field')); }
 
     function validate(field) {
@@ -137,17 +144,23 @@
       var title = form.getAttribute('data-title') || '문의하기';
       var submit = form.querySelector('[type="submit"]');
 
+      if (trap.value) { location.href = thanks; return; }
+
       if (cfg.formEndpoint) {
         if (submit) { submit.disabled = true; submit.textContent = '제출 중…'; }
+        // text/plain 으로 보내야 Google Apps Script 웹 앱이 CORS 사전 요청 없이 받을 수 있다.
         fetch(cfg.formEndpoint, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({
             form: key, title: title, submittedAt: new Date().toISOString(), page: location.href,
             fields: data,
           }),
         }).then(function (res) {
           if (!res.ok) throw new Error(res.status);
+          return res.json().catch(function () { return { ok: true }; });
+        }).then(function (result) {
+          if (result && result.ok === false) throw new Error(result.error);
           location.href = thanks;
         }).catch(function () {
           if (submit) { submit.disabled = false; submit.textContent = '제출하기'; }
