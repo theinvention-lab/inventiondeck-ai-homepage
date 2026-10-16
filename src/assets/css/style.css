@@ -404,8 +404,8 @@ th { background: var(--bg-2); font-weight: 500; white-space: nowrap; }
   animation: introOut .8s cubic-bezier(.7, 0, .3, 1) 3.85s forwards; }
 .intro-on .intro::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(15, 23, 42, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, .05) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 70%); mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 70%); }
 .intro-lock, .intro-lock body { overflow: hidden; }
-.intro-stage { --Sx: 210px; --Sy: 200px; position: relative; width: 0; height: 0; }
-.intro-card { --w: 124px; --h: 168px; position: absolute; left: 0; top: 0; width: var(--w); height: var(--h); margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2); background: #fff; border: 1px solid rgba(15, 23, 42, .08); border-radius: 16px; box-shadow: 0 14px 34px rgba(60, 10, 20, .14); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; opacity: 0;
+.intro-stage { --Sx: 225px; --Sy: 200px; position: relative; width: 0; height: 0; }
+.intro-card { --w: 152px; --h: 172px; position: absolute; left: 0; top: 0; width: var(--w); height: var(--h); margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2); background: #fff; border: 1px solid rgba(15, 23, 42, .08); border-radius: 16px; box-shadow: 0 14px 34px rgba(60, 10, 20, .14); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; opacity: 0;
   animation: introCard 3.1s cubic-bezier(.65, 0, .25, 1) forwards; }
 .intro-card .tag { font-size: .62rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; align-self: flex-start; }
 .intro-card .icon { font-size: 1.9rem; line-height: 1; }
@@ -430,12 +430,13 @@ th { background: var(--bg-2); font-weight: 500; white-space: nowrap; }
 @keyframes introLogo { to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 @keyframes introOut { to { opacity: 0; visibility: hidden; transform: scale(1.04); } }
 @media (max-width: 640px) {
-  .intro-stage { --Sx: 112px; --Sy: 124px; }
-  .intro-card { --w: 82px; --h: 114px; padding: 8px; border-radius: 12px; }
+  .intro-stage { --Sx: 116px; --Sy: 124px; }
+  .ic2 { --ux: -1.2; } .ic5 { --ux: 1.2; }
+  .intro-card { --w: 92px; --h: 114px; padding: 8px; border-radius: 12px; }
   .intro-card .tag { font-size: .5rem; padding: 1px 5px; letter-spacing: .02em; }
   .intro-card .icon { font-size: 1.3rem; }
   .intro-card b { font-size: .74rem; }
-  .intro-logo { width: 128px; }
+  .intro-logo { width: 116px; }
 }
 /* 인트로가 끝날 때 히어로가 이어서 나타남 */
 .intro-on .hero-grid > div:first-child > * { animation: introUp .8s cubic-bezier(.2, .7, .2, 1) both; }
