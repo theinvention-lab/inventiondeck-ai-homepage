@@ -69,7 +69,7 @@ function footer() {
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-about">
-      <a class="brand brand-footer" href="{{root}}index.html"><img class="brand-logo" src="{{root}}assets/img/logo.png" alt="InventionDeck AI" width="88" height="40"></a>
+      <a class="brand brand-footer" href="{{root}}index.html"><img class="brand-logo" src="{{root}}assets/img/logo-white.png" alt="InventionDeck AI" width="88" height="40"></a>
       <p>카드로 발상하고, AI로 확장하고, 템플릿으로 구체화하는 비즈니스 아이디에이션 플랫폼</p>
       <p class="footer-company">${site.company} · 대표 ${site.ceo}<br>문의 <a href="mailto:${site.email}">${site.email}</a></p>
     </div>
@@ -132,7 +132,7 @@ const INTRO_HEAD = `<script>
     var el = document.getElementById('intro');
     if (el) el.remove();
   }
-  var t = setTimeout(end, 3400);
+  var t = setTimeout(end, 4800);
   function skip() { clearTimeout(t); d.classList.remove('intro-on'); end(); }
   addEventListener('DOMContentLoaded', function () {
     var el = document.getElementById('intro');
