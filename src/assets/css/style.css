@@ -60,6 +60,10 @@ ul, ol { padding-left: 1.3em; }
 .btn-light { background: #fff; color: var(--brand-ink); }
 .btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--line); }
 .btn-ghost:hover { background: var(--bg-3); }
+.btn-soft { background: #fff; color: var(--ink); border-color: var(--line); box-shadow: 0 2px 8px rgba(15, 23, 42, .06); }
+.btn-soft:hover { border-color: var(--ink-2); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #1e293b; }
 .btn-outline-light { color: #fff; border-color: rgba(255, 255, 255, .5); }
 .btn-outline-light:hover { background: rgba(255, 255, 255, .12); }
 .btn-sm { padding: .55em 1.05em; font-size: .9rem; }

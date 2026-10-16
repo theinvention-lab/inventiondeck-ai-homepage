@@ -52,6 +52,7 @@ function header(current) {
     </button>
     <nav id="site-nav" class="site-nav" aria-label="주 메뉴" data-nav>
       ${links}
+      <a class="btn btn-dark btn-sm nav-cta" href="{{root}}contact.html"${current === 'contact' ? ' aria-current="page"' : ''}>문의하기</a>
     </nav>
   </div>
 </header>`;
