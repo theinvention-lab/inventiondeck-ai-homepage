@@ -6,6 +6,11 @@ import { fileURLToPath } from 'node:url';
 import { site, nav, guideGroups, footerLinks } from './src/site.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
+// 공유 미리보기(og:url, og:image)는 절대주소가 필요하다.
+// Vercel 빌드에서는 프로젝트 기본 주소를, 그 외(GitHub Pages 등)에서는 site.url 을 쓴다. SITE_URL 환경변수로 덮어쓸 수 있다.
+const SITE_URL = (process.env.SITE_URL
+  || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? 'https://' + process.env.VERCEL_PROJECT_PRODUCTION_URL : '')
+  || site.url).replace(/\/$/, '');
 const SRC = path.join(ROOT, 'src');
 const PAGES = path.join(SRC, 'pages');
 const OUT = path.join(ROOT, 'dist');
@@ -185,7 +190,17 @@ function layout({ meta, body, rel }) {
 <meta property="og:site_name" content="${site.name}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:url" content="${site.url}${cleanPath('/' + href)}">
+<meta property="og:url" content="${SITE_URL}${cleanPath('/' + href)}">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="${SITE_URL}/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="InventionDeck AI — 막막한 아이디에이션, 더 이상 혼자 고민하지 마세요">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(desc)}">
+<meta name="twitter:image" content="${SITE_URL}/assets/img/og-image.png">
+<link rel="canonical" href="${SITE_URL}${cleanPath('/' + href)}">
 <meta name="theme-color" content="#f0002d">
 <link rel="icon" href="{{root}}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>

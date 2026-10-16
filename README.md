@@ -29,6 +29,10 @@ npm run check   # 빌드 + 내부 링크 검사
 | 양식 제출 완료 / 마감 안내 | `thanks.html?form=…`, `form-closed.html?state=closed` |
 | 서비스이용약관 / 개인정보처리방침 | `terms.html`, `privacy.html` |
 
+## 링크 공유 미리보기
+모든 페이지에 Open Graph / Twitter 카드 태그가 들어갑니다. 미리보기 이미지는 `src/assets/img/og-image.png`(1200×630)이며, 같은 이름의 파일로 바꾸면 됩니다.
+미리보기에는 절대주소가 필요해서 빌드 시 주소를 정합니다: `SITE_URL` 환경변수 → Vercel 프로젝트 주소(`VERCEL_PROJECT_PRODUCTION_URL`) → `src/site.mjs`의 `url` 순.
+
 ## 양식 데이터 연결 (Google 스프레드시트)
 홈페이지의 모든 양식(문의하기, 프로그램 문의, 피드백, 신규 카드 요청, 카드 오류 제보, 인벤션덱AI 오류 제보, 의견 남기기)은 하나의 스프레드시트에 양식별 탭으로 저장됩니다.
 
