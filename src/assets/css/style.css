@@ -607,3 +607,52 @@ th { background: var(--bg-2); font-weight: 500; white-space: nowrap; }
   .tm-slot, .tm-slot.wide { flex: 1 1 100%; }
   .tm-sentence b { font-size: .88rem; }
 }
+
+/* ---------- 문서 템플릿 (사업계획서 · 피치덱) ---------- */
+.en-sub { font-size: .55em; color: var(--muted); font-weight: 400; letter-spacing: 0; margin-left: 6px; }
+.tpl-body h3 .en-sub { font-size: .7em; }
+.doc-head { text-align: center; max-width: 640px; margin: 48px auto 28px; }
+.doc-head h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+.doc-head p { color: var(--muted); margin: 0; }
+.tpl-grid-2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 640px) { .tpl-grid-2 { grid-template-columns: 1fr; } }
+.thumb-bp, .thumb-pd { display: grid; gap: 10px; padding: 22px 26px; background: linear-gradient(135deg, #fff7ed, #fff1f3); }
+.thumb-bp { grid-template-columns: 1fr 1fr; grid-template-rows: 14px 1fr 1fr; }
+.thumb-bp .tb-title { grid-column: 1 / -1; width: 46%; justify-self: center; background: #fda4af; border-radius: 4px; }
+.thumb-bp .tb-box { background: #fff; border: 1px solid #fde68a; border-radius: 8px; box-shadow: 0 4px 10px rgba(120, 60, 10, .06); background-image: linear-gradient(#f1f5f9 0 0), linear-gradient(#f1f5f9 0 0), linear-gradient(#f1f5f9 0 0); background-size: 60% 5px, 80% 5px, 70% 5px; background-position: 10px 12px, 10px 24px, 10px 36px; background-repeat: no-repeat; }
+.thumb-pd { grid-template-columns: repeat(3, 1fr); align-content: center; }
+.thumb-pd span { aspect-ratio: 16 / 9; background: #fff; border-radius: 6px; border-top: 4px solid var(--brand); box-shadow: 0 4px 10px rgba(120, 60, 10, .08); }
+/* 목업 공통 */
+.tm-head.center { text-align: center; }
+.sk { display: block; height: 7px; border-radius: 4px; background: #e9edf2; margin: 0 0 8px; }
+.sk-s { height: 5px; margin-bottom: 5px; }
+.mb { display: inline-block; font-size: .78rem; padding: 7px 14px; border-radius: 8px; color: #fff; margin-left: 6px; }
+.mb-ghost { background: #e2e8f0; color: var(--ink-2); margin-left: 0; } .mb-dark { background: #1e293b; } .mb-teal { background: #0f766e; } .mb-red { background: var(--brand); }
+.bp-actions { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+/* 사업계획서 */
+.bp-comment { background: #fff; border-radius: 10px; padding: 14px 16px 8px; margin-bottom: 14px; }
+.bp-comment b { display: block; font-weight: 500; font-size: .88rem; margin-bottom: 10px; }
+.bp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.bp-sec { background: #fff; border: 1px solid #fde68a; border-radius: 10px; box-shadow: 0 2px 8px rgba(120, 60, 10, .05); }
+.bp-sec-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid #fef3c7; font-size: .8rem; color: var(--brand); }
+.bp-tools { display: flex; gap: 4px; flex-shrink: 0; }
+.bp-tools b { width: 22px; height: 22px; border-radius: 6px; background: #f1f5f9; color: var(--ink-2); display: grid; place-items: center; font-size: .7rem; font-weight: 400; }
+.bp-tools .re { background: var(--brand-soft); color: var(--brand); }
+.bp-sec-body { padding: 14px 14px 8px; }
+/* 피치덱 */
+.pd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pd-frame { position: relative; aspect-ratio: 16 / 9; background: #fff; border-radius: 8px; border-top: 4px solid var(--brand); box-shadow: 0 2px 8px rgba(15, 23, 42, .06); padding: 22px 16px 10px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
+.pd-frame b { font-weight: 500; font-size: .9rem; margin-bottom: 4px; }
+.pd-frame em { font-style: normal; color: var(--muted); font-size: .8rem; }
+.pd-no { position: absolute; right: 10px; top: 8px; font-size: .68rem; color: var(--muted); }
+.pd-slide:first-child .pd-frame { justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #fff, #fff1f3); }
+.pd-slide:first-child .pd-frame b { font-size: 1.05rem; }
+.pd-tools { display: flex; gap: 6px; margin-top: 6px; }
+.pd-tools span { font-size: .66rem; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 2px 7px; }
+.pd-add .pd-frame { border: 2px dashed #cbd5e1; border-top-width: 2px; background: transparent; box-shadow: none; align-items: center; justify-content: center; color: var(--muted); font-size: .85rem; }
+@media (max-width: 760px) {
+  .bp-grid { grid-template-columns: 1fr; }
+  .pd-grid { grid-template-columns: 1fr 1fr; }
+  .bp-actions { justify-content: center; }
+  .bp-actions .mb { margin: 4px 3px; }
+}
