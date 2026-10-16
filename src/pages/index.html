@@ -54,15 +54,22 @@ intro: true
       <span class="eyebrow">How it works</span>
       <h2>복잡하지 않아요.<br>누구나 아이디어를 만들 수 있어요!</h2>
     </div>
-    <ol class="steps reveal">
-      <li><b>카드 살펴보기</b><span>다양한 카테고리의 카드들을 탐색하며 관심가는 키워드의 상세내용을 확인해요</span></li>
-      <li><b>카드덱 저장하기</b><span>나중에 참고하거나 사용하고 싶은 카드의 하트를 눌러 카드덱으로 저장해요</span></li>
-      <li><b>카드 선택하기</b><span>원하는 카드를 직접 고르거나 입력한 정보를 기반으로 AI로부터 카드 추천을 받아요</span></li>
-      <li><b>아이디어 생성하기</b><span>선택한 카드 조합으로 AI가 새로운 비즈니스 아이디어를 제안해요</span></li>
-      <li><b>아이디어 보관하기</b><span>마음에 드는 아이디어를 나만의 아이디어 보관함에 저장해요</span></li>
-      <li><b>아이디어 구체화하기</b><span>비즈니스 템플릿을 활용해 마음에 드는 아이디어를 구체적인 형태로 발전시켜요</span></li>
-      <li><b>아이디어 저장하기</b><span>아이디어를 저장하고 필요할 때 꺼내볼 수 있도록 관리해요</span></li>
-    </ol>
+    <div class="journey reveal">
+      <svg class="journey-road" viewBox="0 0 1000 480" preserveAspectRatio="none" aria-hidden="true">
+        <path class="road" d="M 20 80 L 900 80 C 985 80 985 320 900 320 L 250 320"/>
+        <path class="road-line" d="M 20 80 L 900 80 C 985 80 985 320 900 320 L 250 320"/>
+      </svg>
+      <span class="j-start" aria-hidden="true">START</span>
+      <ol class="journey-steps">
+      <li style="--x:12.5%; --y:80px; --i:0"><span class="j-node">01</span><div class="j-text"><b>카드 살펴보기</b><span>다양한 카테고리의 카드들을 탐색하며 관심가는 키워드의 상세내용을 확인해요</span></div></li>
+      <li style="--x:37.5%; --y:80px; --i:1"><span class="j-node">02</span><div class="j-text"><b>카드덱 저장하기</b><span>나중에 참고하거나 사용하고 싶은 카드의 하트를 눌러 카드덱으로 저장해요</span></div></li>
+      <li style="--x:62.5%; --y:80px; --i:2"><span class="j-node">03</span><div class="j-text"><b>카드 선택하기</b><span>원하는 카드를 직접 고르거나 입력한 정보를 기반으로 AI로부터 카드 추천을 받아요</span></div></li>
+      <li style="--x:87.5%; --y:80px; --i:3"><span class="j-node">04</span><div class="j-text"><b>아이디어 생성하기</b><span>선택한 카드 조합으로 AI가 새로운 비즈니스 아이디어를 제안해요</span></div></li>
+      <li style="--x:75%; --y:320px; --i:4"><span class="j-node">05</span><div class="j-text"><b>아이디어 보관하기</b><span>마음에 드는 아이디어를 나만의 아이디어 보관함에 저장해요</span></div></li>
+      <li style="--x:50%; --y:320px; --i:5"><span class="j-node">06</span><div class="j-text"><b>아이디어 구체화하기</b><span>비즈니스 템플릿을 활용해 마음에 드는 아이디어를 구체적인 형태로 발전시켜요</span></div></li>
+      <li class="goal" style="--x:25%; --y:320px; --i:6"><span class="j-node"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M6 21V3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M7 4h11l-2.6 4L18 12H7z" fill="currentColor"/></svg></span><div class="j-text"><em class="j-badge">목적지</em><b>아이디어 저장하기</b><span>아이디어를 저장하고 필요할 때 꺼내볼 수 있도록 관리해요</span></div></li>
+      </ol>
+    </div>
     <p class="center" style="margin-top:40px"><a class="btn btn-primary" href="{{root}}guide/index.html">자세한 기능 알아보기</a></p>
   </div>
 </section>

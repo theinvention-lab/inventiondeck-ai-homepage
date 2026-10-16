@@ -165,11 +165,44 @@ ul, ol { padding-left: 1.3em; }
 .feature p { color: var(--ink-2); margin: 0; }
 
 /* ---------- Steps ---------- */
-.steps { list-style: none; padding: 0; margin: 0 auto; max-width: 980px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; counter-reset: step; }
-.steps li { counter-increment: step; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 22px 22px 70px; position: relative; }
-.steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 20px; top: 20px; font-weight: 500; color: var(--brand); font-size: 1.2rem; }
-.steps b { display: block; font-size: 1.05rem; margin-bottom: 4px; }
-.steps span { color: var(--muted); font-size: .95rem; }
+/* How it works: 길을 따라 목적지(아이디어 저장하기)까지 */
+.journey { position: relative; max-width: 1120px; height: 540px; margin: 0 auto; }
+.journey-road { position: absolute; left: 0; top: 0; width: 100%; height: 480px; overflow: visible; }
+.journey-road path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.journey-road .road { stroke: #e8ebf1; stroke-width: 30px; }
+.journey-road .road-line { stroke: #fff; stroke-width: 2px; stroke-dasharray: 10 12; }
+.j-start { position: absolute; left: 0; top: 80px; transform: translateY(-50%); font-size: .7rem; letter-spacing: .12em; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+.journey-steps { list-style: none; margin: 0; padding: 0; }
+.journey-steps li { position: absolute; left: var(--x); top: var(--y); width: 0; height: 0; }
+.j-node { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%); width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 2px solid var(--brand); color: var(--brand); font-size: .92rem; font-weight: 500; box-shadow: 0 6px 16px rgba(60, 10, 20, .12); }
+.j-text { position: absolute; left: 0; top: 40px; transform: translateX(-50%); width: 230px; text-align: center; }
+.j-text b { display: block; font-size: 1.08rem; margin-bottom: 4px; }
+.j-text span { display: block; color: var(--muted); font-size: .9rem; line-height: 1.6; }
+.journey-steps li.goal .j-node { width: 68px; height: 68px; background: var(--brand); color: #fff; border: 0; box-shadow: 0 0 0 10px rgba(240, 0, 45, .1), 0 12px 28px rgba(240, 0, 45, .3); }
+.journey-steps li.goal .j-node::after { content: ''; position: absolute; inset: -10px; border-radius: 50%; border: 2px solid rgba(240, 0, 45, .35); animation: goalPulse 2.2s ease-out infinite; }
+@keyframes goalPulse { from { transform: scale(.9); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
+.journey-steps li.goal .j-text { top: 52px; }
+.journey-steps li.goal .j-text b { color: var(--brand); font-size: 1.2rem; }
+.j-badge { display: inline-block; font-style: normal; font-size: .72rem; color: var(--brand); background: var(--brand-soft); border-radius: 999px; padding: 2px 10px; margin-bottom: 6px; }
+/* 길 위의 지점들이 순서대로 나타남 */
+.journey.reveal .journey-steps li { opacity: 0; transition: opacity .5s ease; transition-delay: calc(var(--i) * .14s + .2s); }
+.journey.reveal.in .journey-steps li { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .journey-steps li.goal .j-node::after { animation: none; } }
+@media (max-width: 900px) {
+  .journey { height: auto; max-width: 520px; padding-left: 8px; }
+  .journey-road, .j-start { display: none; }
+  .journey-steps { position: relative; padding: 4px 0 0 0; }
+  /* 각 지점에서 다음 지점까지 길을 이어 그림 → 목적지에서 길이 끝남 */
+  .journey-steps li:not(.goal)::before { content: ''; position: absolute; left: 23px; top: 23px; bottom: -23px; width: 24px; transform: translateX(-50%); background: #e8ebf1; z-index: -1; }
+  .journey-steps li:not(.goal)::after { content: ''; position: absolute; left: 23px; top: 23px; bottom: -23px; width: 2px; transform: translateX(-50%); background: repeating-linear-gradient(#fff 0 10px, transparent 10px 22px); z-index: -1; }
+  .journey-steps li:first-child::before { border-radius: 12px 12px 0 0; }
+  .journey-steps li:nth-last-child(2)::before, .journey-steps li:nth-last-child(2)::after { bottom: -58px; }
+  .journey-steps li { position: relative; left: auto; top: auto; width: auto; height: auto; min-height: 46px; padding: 8px 0 26px 72px; z-index: 1; }
+  .j-node { left: 23px; top: 23px; }
+  .j-text { position: static; transform: none; width: auto; text-align: left; }
+  .journey-steps li.goal { padding-left: 72px; padding-top: 18px; }
+  .journey-steps li.goal .j-node { top: 40px; width: 58px; height: 58px; }
+}
 
 /* ---------- Pricing ---------- */
 .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
