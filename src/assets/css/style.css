@@ -559,3 +559,28 @@ th { background: var(--bg-2); font-weight: 500; white-space: nowrap; }
 .intro-on .floating-cta { animation: introCta .6s ease 4.7s both; }
 @keyframes introUp { from { opacity: 0; transform: translateY(28px); } }
 @keyframes introCta { from { opacity: 0; transform: translate(-50%, 20px); } }
+
+/* ---------- 템플릿 목업 (입력 불가 예시 화면) ---------- */
+.tpl-mock { background: #f1f5f9; border-radius: 16px; padding: 28px; user-select: none; }
+.tm-head h2 { font-size: 1.35rem; margin: 0 0 2px; }
+.tm-head p { font-size: .88rem; color: var(--muted); margin: 0 0 16px; }
+.tm-sheet { background: #fff; border-radius: 12px; box-shadow: 0 4px 16px rgba(15, 23, 42, .08); padding: 8px 24px; }
+.tm-block { padding: 20px 0 24px; }
+.tm-block + .tm-block { border-top: 1px solid var(--line); }
+.tm-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.tm-title h3 { color: var(--brand); font-size: 1.15rem; margin: 0 0 2px; }
+.tm-title p { font-size: .78rem; color: var(--muted); margin: 0; }
+.tm-ai { flex-shrink: 0; width: 30px; height: 30px; border-radius: 8px; background: #475569; color: #fff; display: grid; place-items: center; font-size: .8rem; }
+.tm-area { min-height: 84px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .82rem; color: #94a3b8; line-height: 1.6; }
+.tm-sentence { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.tm-sentence b { font-weight: 500; font-size: .95rem; white-space: nowrap; color: var(--ink-2); }
+.tm-slot { flex: 1; min-width: 0; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 7px 10px; text-align: center; font-size: .85rem; color: var(--ink-2); line-height: 1.4; }
+.tm-slot small { display: block; font-size: .68rem; color: var(--muted); margin-bottom: 2px; }
+.tm-note { font-size: .8rem; color: var(--muted); margin: 14px 0 0; }
+@media (max-width: 760px) {
+  .tpl-mock { padding: 16px; }
+  .tm-sheet { padding: 4px 14px; }
+  .tm-sentence { flex-wrap: wrap; gap: 6px 8px; }
+  .tm-slot, .tm-slot.wide { flex: 1 1 100%; }
+  .tm-sentence b { font-size: .88rem; }
+}
