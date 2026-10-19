@@ -5,22 +5,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/feedback/new-card",
-      "destination": "/feedback#tab-new-card",
-      "permanent": true
-    },
-    {
-      "source": "/feedback/card-error",
-      "destination": "/feedback#tab-card-error",
-      "permanent": true
-    },
-    {
-      "source": "/feedback/app-error",
-      "destination": "/feedback#tab-app-error",
-      "permanent": true
-    }
-  ]
+  "trailingSlash": false
 }
