@@ -1,17 +1,9 @@
 // 의존성 없는 정적 사이트 빌더.
-// src/pages/**/*.html 의 front matter + 본문을 공통 레이아웃(헤더·푸터)으로 감싸 dist/ 에 출력한다.
-//
-// 페이지 안에서 쓸 수 있는 표기
-//   {{root}}            사이트 루트(/)
-//   [[국문||English]]   KR/EN 토글에 따라 한쪽만 보이는 짧은 글
-//   {{link:키}}         src/site.mjs 의 links 값 (비어 있으면 비활성 링크)
-//   {{art:이름}}        src/art.mjs 의 선 일러스트(SVG)
+// src/pages/**/*.html 의 front matter + 본문을 공통 레이아웃으로 감싸 dist/ 에 출력한다.
 import { readFile, writeFile, mkdir, readdir, cp, rm } from 'node:fs/promises';
 import path from 'node:path';
-import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { site, nav, links } from './src/site.mjs';
-import { art } from './src/art.mjs';
+import { site, nav, guideGroups, footerLinks } from './src/site.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 // 공유 미리보기(og:url, og:image)는 절대주소가 필요하다.
@@ -22,16 +14,6 @@ const SITE_URL = (process.env.SITE_URL
 const SRC = path.join(ROOT, 'src');
 const PAGES = path.join(SRC, 'pages');
 const OUT = path.join(ROOT, 'dist');
-
-// 배포할 때마다 브라우저가 새 CSS/JS 를 받도록 파일 내용 해시를 ?v= 로 붙인다.
-const VERSION = {};
-async function versionAssets() {
-  for (const f of ['css/style.css', 'js/config.js', 'js/main.js', 'js/data.js']) {
-    const buf = await readFile(path.join(SRC, 'assets', f));
-    VERSION[f] = createHash('sha1').update(buf).digest('hex').slice(0, 8);
-  }
-}
-const asset = (f) => `{{root}}assets/${f}?v=${VERSION[f]}`;
 
 async function walk(dir) {
   const out = [];
@@ -55,105 +37,150 @@ function parse(raw) {
 }
 
 const esc = (s = '') => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const bi = (l) => `<span class="ko">${l.ko}</span><span class="en">${l.en}</span>`;
 
-// /about.html → /about, /cases/index.html → /cases, /index.html → /
-function cleanPath(p) {
-  const out = p.replace(/\.html$/, '').replace(/\/index$/, '');
-  return out || '/';
-}
-
-// 언어 설정을 첫 화면 그리기 전에 적용해 KR/EN 깜빡임을 막는다.
-const LANG_HEAD = `<script>
-(function () {
-  var l = 'ko';
-  try { l = localStorage.getItem('app_lang') === 'en' ? 'en' : 'ko'; } catch (e) {}
-  document.documentElement.setAttribute('data-lang', l);
-  document.documentElement.lang = l;
-})();
-</script>`;
-
-const WORDMARK = `<span class="wm-the">The</span> Invention Lab`;
+// 가이드 하위 페이지 순서 (이전/다음 내비게이션 용)
+const guideFlat = guideGroups.flatMap((g) => g.items.map((it) => ({ ...it, group: g.title })));
 
 function header(current) {
-  const items = nav
-    .map((n) => {
-      const on = n.key === current ? ' aria-current="page"' : '';
-      if (!n.children) return `<li><a href="{{root}}${n.href}"${on}>${bi(n.label)}</a></li>`;
-      const sub = n.children.map((c) => `<li><a href="{{root}}${c.href}">${bi(c.label)}</a></li>`).join('');
-      return `<li class="has-sub"><a href="{{root}}${n.href}"${on}>${bi(n.label)}</a><ul class="sub">${sub}</ul></li>`;
-    })
+  const links = nav
+    .map((n) => `<a href="{{root}}${n.href}"${n.key === current ? ' aria-current="page"' : ''}>${n.label}</a>`)
     .join('');
   return `
-<a class="skip-link" href="#main">[[본문 바로가기||Skip to content]]</a>
+<a class="skip-link" href="#main">본문 바로가기</a>
 <header class="site-header" data-header>
-  <div class="wrap header-inner">
-    <a class="wordmark" href="{{root}}index.html" aria-label="${site.name}">${WORDMARK}</a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle><span class="sr-only">Menu</span><i></i><i></i></button>
-    <nav id="site-nav" class="site-nav" aria-label="Main" data-nav>
-      <ul class="menu">${items}</ul>
-      <div class="nav-tools">
-        <div class="lang" role="group" aria-label="Language">
-          <button type="button" data-set-lang="ko">KR</button><span aria-hidden="true">/</span><button type="button" data-set-lang="en">EN</button>
-        </div>
-        <a class="btn btn-line btn-sm" href="{{root}}contact.html"${current === 'contact' ? ' aria-current="page"' : ''}>[[문의하기||Contact]]</a>
-        <a class="btn btn-solid btn-sm" href="{{root}}contact.html?type=investment">[[투자 제안 요청||Pitch to Us]]</a>
-      </div>
+  <div class="container header-inner">
+    <a class="brand" href="{{root}}index.html" aria-label="${site.name} 홈">
+      <img class="brand-logo" src="{{root}}assets/img/logo.png" alt="InventionDeck" width="88" height="40">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="sr-only">메뉴 열기</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="주 메뉴" data-nav>
+      ${links}
+      <a class="btn btn-dark btn-sm nav-cta" href="{{root}}contact.html"${current === 'contact' ? ' aria-current="page"' : ''}>문의하기</a>
     </nav>
   </div>
 </header>`;
 }
 
 function footer() {
-  const ext = (key, label) => `<li><a href="{{link:${key}}}">${label}</a></li>`;
+  const cols = footerLinks
+    .map(
+      (col) => `<div class="footer-col"><h3>${col.title}</h3><ul>${col.items
+        .map((it) => `<li><a href="{{root}}${it.href}">${it.label}</a></li>`)
+        .join('')}</ul></div>`
+    )
+    .join('');
   return `
 <footer class="site-footer">
-  <section class="wrap footer-cta">
-    <h2>Start Your Venture Project<br>with Us!</h2>
-    <p>[[더인벤션랩과 함께 비즈니스의 새로운 가능성을 설계하세요.||Design new possibilities for your business with The Invention Lab.]]</p>
-    <a class="btn btn-line" href="{{root}}contact.html">[[문의하기||Contact Us]] <span aria-hidden="true">→</span></a>
-  </section>
-  <div class="wrap footer-grid">
-    <a class="wordmark" href="{{root}}index.html">${WORDMARK}</a>
-    <div class="footer-col">
-      <h3>Insights</h3>
-      <ul>
-        <li><a href="{{root}}insights/index.html">News</a></li>
-        ${ext('youtube', 'Youtube')}
-        ${ext('blog', 'Blog')}
-      </ul>
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="brand brand-footer" href="{{root}}index.html"><img class="brand-logo" src="{{root}}assets/img/logo-white.png" alt="InventionDeck AI" width="88" height="40"></a>
+      <p>카드로 발상하고, AI로 확장하고, 템플릿으로 구체화하는 비즈니스 아이디에이션 플랫폼</p>
+      <p class="footer-company">${site.company} · 대표 ${site.ceo}<br>문의 <a href="mailto:${site.email}">${site.email}</a></p>
     </div>
-    <div class="footer-col">
-      <h3>Family Companies</h3>
-      <ul>
-        ${ext('sheVentures', 'SheVentures')}
-        ${ext('acdc', 'AC:DC')}
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h3>Contact</h3>
-      <ul>
-        <li><a href="mailto:${site.email}">${site.email}</a></li>
-        <li><a href="tel:${site.phone.replace(/[^+\d]/g, '')}">${site.phone}</a></li>
-      </ul>
-    </div>
+    ${cols}
   </div>
-  <div class="wrap footer-bottom">
-    <p>© 2025 The Invention Lab. All rights reserved.</p>
-    <ul class="social">${ext('facebook', 'Facebook')}${ext('youtube', 'Youtube')}</ul>
+  <div class="container footer-bottom">
+    <p>© ${new Date().getFullYear()} ${site.companyEn}. All rights reserved.</p>
+    <p><a href="{{root}}terms.html">서비스이용약관</a> · <a href="{{root}}privacy.html"><b>개인정보처리방침</b></a></p>
   </div>
 </footer>`;
 }
 
+function guideSidebar(currentHref) {
+  const groups = guideGroups
+    .map(
+      (g) => `<div class="side-group"><p class="side-title">${g.title}</p><ul>${g.items
+        .map(
+          (it) =>
+            `<li><a href="{{root}}${it.href}"${it.href === currentHref ? ' aria-current="page"' : ''}>${it.label}</a></li>`
+        )
+        .join('')}</ul></div>`
+    )
+    .join('');
+  return `<aside class="guide-side" aria-label="가이드 목차">
+    <a class="side-home" href="{{root}}guide/index.html">← 사용 가이드 홈</a>
+    ${groups}
+  </aside>`;
+}
+
+function guidePager(currentHref) {
+  const i = guideFlat.findIndex((it) => it.href === currentHref);
+  if (i < 0) return '';
+  const prev = guideFlat[i - 1];
+  const next = guideFlat[i + 1];
+  return `<nav class="pager" aria-label="가이드 이전/다음">
+    ${prev ? `<a class="pager-prev" href="{{root}}${prev.href}"><small>이전 · ${prev.group}</small><span>${prev.label}</span></a>` : '<span></span>'}
+    <a class="btn btn-ghost" href="{{root}}guide/index.html">뒤로가기</a>
+    ${next ? `<a class="pager-next" href="{{root}}${next.href}"><small>다음 · ${next.group}</small><span>${next.label}</span></a>` : '<span></span>'}
+  </nav>`;
+}
+
+// /guide/index.html → /guide, /terms.html → /terms, /index.html → /
+function cleanPath(p) {
+  const out = p.replace(/\.html$/, '').replace(/\/index$/, '');
+  return out || '/';
+}
+
+// 홈 첫 접속 인트로: 겹쳐 있던 카드가 펼쳐지며 로고가 나온 뒤 홈이 나타난다.
+// 세션당 한 번만 재생하고, 동작 줄이기 설정 사용자나 JS가 꺼진 환경에서는 건너뛴다.
+const INTRO_HEAD = `<script>
+(function () {
+  var d = document.documentElement, KEY = 'id-intro-seen';
+  try {
+    if (sessionStorage.getItem(KEY) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    sessionStorage.setItem(KEY, '1');
+  } catch (e) { return; }
+  d.classList.add('intro-on', 'intro-lock');
+  function end() {
+    d.classList.remove('intro-lock');
+    var el = document.getElementById('intro');
+    if (el) el.remove();
+  }
+  var t = setTimeout(end, 4800);
+  function skip() { clearTimeout(t); d.classList.remove('intro-on'); end(); }
+  addEventListener('DOMContentLoaded', function () {
+    var el = document.getElementById('intro');
+    if (el) el.addEventListener('click', skip);
+  });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') skip(); }, { once: true });
+})();
+</script>
+`;
+
+const INTRO_CARDS = [
+  ['theme', 'Theme', '🏥', '헬스케어'],
+  ['target', 'Target', '🧑‍💻', 'MZ세대'],
+  ['trend', 'Trend', '🌱', '친환경'],
+  ['tech', 'Tech', '🤖', '생성형 AI'],
+  ['feature', 'Feature', '🤝', '커뮤니티'],
+  ['revenue', 'Revenue', '🔁', '구독 모델'],
+];
+const INTRO_MARKUP = `<div class="intro" id="intro" aria-hidden="true" title="클릭하면 건너뜁니다">
+  <div class="intro-stage">
+${INTRO_CARDS.map(([k, tag, icon, name], i) => `    <div class="intro-card ic${i + 1}"><span class="tag t-${k}">${tag}</span><span class="icon">${icon}</span><b>${name}</b></div>`).join('\n')}
+    <img class="intro-logo" src="/assets/img/logo.png" alt="" width="149" height="68">
+  </div>
+</div>
+`;
+
 function layout({ meta, body, rel }) {
   const href = rel.split(path.sep).join('/');
+  // 모든 링크는 루트 기준 절대경로(/...)로 출력하고, .html 은 아래 cleanUrl 에서 제거한다.
+  const root = '/';
   const title = meta.title ? `${meta.title} | ${site.name}` : `${site.name} — ${site.tagline}`;
   const desc = meta.description || site.description;
-  const pageUrl = `${SITE_URL}${cleanPath('/' + href)}`;
-  const scripts = (meta.scripts || '').split(',').map((s) => s.trim()).filter(Boolean);
+
+  let main = body;
+  if (meta.layout === 'guide') {
+    main = `<div class="container guide-layout">${guideSidebar(href)}<article class="guide-article">${body}${guidePager(
+      href
+    )}</article></div>`;
+  }
 
   const html = `<!doctype html>
-<html lang="ko" data-lang="ko">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -163,52 +190,38 @@ function layout({ meta, body, rel }) {
 <meta property="og:site_name" content="${site.name}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:url" content="${pageUrl}">
+<meta property="og:url" content="${SITE_URL}${cleanPath('/' + href)}">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:locale:alternate" content="en_US">
 <meta property="og:image" content="${SITE_URL}/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="InventionDeck AI — 막막한 아이디에이션, 더 이상 혼자 고민하지 마세요">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
 <meta name="twitter:image" content="${SITE_URL}/assets/img/og-image.png">
-<link rel="canonical" href="${pageUrl}">
-<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="${SITE_URL}${cleanPath('/' + href)}">
+<meta name="theme-color" content="#f0002d">
 <link rel="icon" href="{{root}}assets/img/favicon.png" type="image/png" sizes="36x36">
 <link rel="shortcut icon" href="{{root}}favicon.ico">
 <link rel="apple-touch-icon" href="{{root}}assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="${asset('css/style.css')}">
-${LANG_HEAD}
-<script src="${asset('js/config.js')}" defer></script>
-<script src="${asset('js/main.js')}" defer></script>
-${scripts.includes('data') ? `<script src="${asset('js/data.js')}" defer></script>` : ''}
-</head>
+<link rel="stylesheet" href="{{root}}assets/css/style.css">
+<script src="{{root}}assets/js/config.js" defer></script>
+<script src="{{root}}assets/js/main.js" defer></script>
+${meta.intro ? INTRO_HEAD : ''}</head>
 <body class="${meta.bodyClass || ''}">
-${header(meta.nav)}
+${meta.intro ? INTRO_MARKUP : ''}${header(meta.nav)}
 <main id="main">
-${body}
+${main}
 </main>
 ${footer()}
 </body>
 </html>
 `;
   return html
-    .replace(/\{\{art:(\w+)\}\}/g, (_, k) => {
-      if (!art[k]) throw new Error(`알 수 없는 일러스트: ${k} (${href})`);
-      return art[k]();
-    })
-    .replace(/\[\[([\s\S]*?)\|\|([\s\S]*?)\]\]/g, '<span class="ko">$1</span><span class="en">$2</span>')
-    .replace(/href="\{\{link:(\w+)\}\}"/g, (_, k) => {
-      const v = links[k];
-      if (!v) return 'href="#" aria-disabled="true" data-pending';
-      if (/^https?:/.test(v)) return `href="${v}" target="_blank" rel="noopener"`;
-      return `href="{{root}}${v}"`;
-    })
-    .replaceAll('{{root}}', '/')
+    .replaceAll('{{root}}', root)
     .replaceAll('{{email}}', site.email)
-    .replaceAll('{{phone}}', site.phone)
     .replace(/href="(\/[^"#?]*?)\.html([?#][^"]*)?"/g, (_, p, rest = '') => `href="${cleanPath(p + '.html')}${rest}"`);
 }
 
@@ -218,7 +231,6 @@ async function build() {
   await cp(path.join(SRC, 'assets'), path.join(OUT, 'assets'), { recursive: true });
   await cp(path.join(SRC, 'assets', 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 
-  await versionAssets();
   const files = await walk(PAGES);
   for (const file of files) {
     const rel = path.relative(PAGES, file);
@@ -227,6 +239,7 @@ async function build() {
     await mkdir(path.dirname(dest), { recursive: true });
     await writeFile(dest, layout({ meta, body, rel }));
   }
+  // 커스텀 도메인(GitHub Pages)
   if (site.cname) await writeFile(path.join(OUT, 'CNAME'), site.cname + '\n');
   await writeFile(path.join(OUT, '.nojekyll'), '');
   console.log(`✔ ${files.length}개 페이지를 dist/ 에 빌드했습니다.`);

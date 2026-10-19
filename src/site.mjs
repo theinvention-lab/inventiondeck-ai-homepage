@@ -1,47 +1,96 @@
-// 사이트 전역 설정 · 메뉴 · 푸터
-// 라벨은 { ko, en } 로 적고, 화면에서는 KR/EN 토글(localStorage `app_lang`)에 따라 한쪽만 보인다.
+// 사이트 전역 설정 및 내비게이션 정의
 export const site = {
-  name: 'The Invention Lab',
-  nameKo: '더인벤션랩',
-  tagline: 'Venture Studio for Startup & Corporates',
+  name: 'InventionDeck AI',
+  tagline: '카드와 AI로 시작하는 비즈니스 아이디에이션',
   description:
-    '더인벤션랩은 새로운 사업을 설계하고 성장 단계까지 이끄는 벤처 스튜디오입니다. 신사업 디자인, 벤처 스케일업, 전략적 파트너십, 글로벌 확장까지 함께합니다.',
-  // 공유 미리보기(og:url 등)에 쓰는 대표 주소. 도메인을 바꾸면 여기만 고치면 된다.
+    '인사이트가 담긴 아이디에이션 카드를 조합해 빠르게 발상하고, AI로 비즈니스 아이디어를 생성·고도화하세요. 사업계획서와 IR Deck 초안까지 한 번에.',
   url: 'https://inventiondeck.kr',
+  // 커스텀 도메인으로 GitHub Pages 배포 시 'inventiondeck.kr' 로 설정하면 dist/CNAME 이 생성됩니다.
   cname: '',
   company: '(주)더인벤션랩',
+  companyEn: 'The Invention Lab Inc.',
   ceo: '김진영',
   email: 'contact@roailab.com',
-  phone: '+82-2-508-0740',
-};
-
-// 외부 링크 — 비어 있는 값은 화면에서 링크 없이 글자만 보인다. 실제 주소가 정해지면 채워 넣으세요.
-export const links = {
-  inventiondeck: 'https://app.inventiondeck.kr/',
-  startupVn: '',
-  finedeal: '',
-  youtube: '',
-  facebook: '',
-  blog: 'insights/index.html?section=Blog',
-  sheVentures: '',
-  acdc: '',
-  partnershipSketch: '',
 };
 
 export const nav = [
-  { key: 'about', label: { ko: 'About', en: 'About' }, href: 'about.html' },
+  { key: 'home', label: '서비스 소개', href: 'index.html' },
+  { key: 'guide', label: '사용 가이드', href: 'guide/index.html' },
+  { key: 'template', label: '비즈니스 템플릿', href: 'template/index.html' },
+  { key: 'program', label: '프로그램 소개', href: 'program.html' },
+  { key: 'feedback', label: '피드백', href: 'feedback/index.html' },
+];
+
+export const guideGroups = [
   {
-    key: 'capabilities',
-    label: { ko: 'Capabilities', en: 'Capabilities' },
-    href: 'capabilities/venture-studio.html',
-    children: [
-      { label: { ko: 'Venture Studio', en: 'Venture Studio' }, href: 'capabilities/venture-studio.html' },
-      { label: { ko: 'New Business Design', en: 'New Business Design' }, href: 'capabilities/new-biz-design.html' },
-      { label: { ko: 'Venture Scale-up & MGT', en: 'Venture Scale-up & MGT' }, href: 'capabilities/venture-building.html' },
-      { label: { ko: 'Strategic Partnership', en: 'Strategic Partnership' }, href: 'capabilities/strategic-partnership.html' },
-      { label: { ko: 'Global Expansion', en: 'Global Expansion' }, href: 'capabilities/global-expansion.html' },
+    title: 'Idea Generator',
+    items: [
+      { label: '카드 살펴보기', href: 'guide/cards.html' },
+      { label: '카드 선택하기', href: 'guide/select-cards.html' },
+      { label: 'AI 아이디어 생성하기', href: 'guide/generate-idea.html' },
+      { label: '아이디어 보관하기', href: 'guide/archive-idea.html' },
     ],
   },
-  { key: 'cases', label: { ko: 'Cases', en: 'Cases' }, href: 'cases/index.html' },
-  { key: 'insights', label: { ko: 'Insights', en: 'Insights' }, href: 'insights/index.html' },
+  {
+    title: 'Idea Builder',
+    items: [
+      { label: '비즈니스 아이디어 템플릿 선택하기', href: 'guide/choose-template.html' },
+      { label: '비즈니스 아이디어 구체화하기', href: 'guide/develop-idea.html' },
+      { label: '다른 템플릿 사용하기', href: 'guide/other-templates.html' },
+    ],
+  },
+  {
+    title: 'Business Planner & Pitch Deck Builder',
+    items: [
+      { label: '사업계획서 작성하기', href: 'guide/business-plan.html' },
+      { label: 'IR Deck 초안 작성하고 다운로드하기', href: 'guide/ir-deck.html' },
+    ],
+  },
+  {
+    title: 'My Idea Deck',
+    items: [
+      { label: 'Card Deck', href: 'guide/card-deck.html' },
+      { label: 'My Idea Deck', href: 'guide/my-idea-deck.html' },
+    ],
+  },
+  {
+    title: 'Others',
+    items: [
+      { label: 'Edit Profile', href: 'guide/edit-profile.html' },
+      { label: 'Guide & Feedback', href: 'guide/guide-feedback.html' },
+      { label: 'AI에게 질문하기', href: 'guide/ask-ai.html' },
+    ],
+  },
+];
+
+export const footerLinks = [
+  {
+    title: '서비스',
+    items: [
+      { label: '서비스 소개', href: 'index.html' },
+      { label: '사용 가이드', href: 'guide/index.html' },
+      { label: '비즈니스 템플릿', href: 'template/index.html' },
+      { label: '공지사항', href: 'notice.html' },
+    ],
+  },
+  {
+    title: '프로그램',
+    items: [
+      { label: '신사업 아이디어 발굴', href: 'program.html#tab-discovery' },
+      { label: '린스타트업 코스', href: 'program.html#tab-lean' },
+      { label: '사내벤처 코스', href: 'program.html#tab-venture' },
+      { label: '프로그램 문의', href: 'program.html#program-inquiry' },
+    ],
+  },
+  {
+    title: '고객지원',
+    items: [
+      { label: '베타테스터 신청 · 문의', href: 'contact.html' },
+      { label: '피드백 제출하기', href: 'feedback/index.html' },
+      { label: '신규 카드 요청', href: 'feedback/index.html#tab-new-card' },
+      { label: '카드 오류 제보', href: 'feedback/index.html#tab-card-error' },
+      { label: '인벤션덱AI 오류 제보', href: 'feedback/index.html#tab-app-error' },
+      { label: '의견 남기기', href: 'feedback/opinion.html' },
+    ],
+  },
 ];

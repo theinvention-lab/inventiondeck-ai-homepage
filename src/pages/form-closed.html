@@ -1,0 +1,19 @@
+---
+title: 양식 마감 안내
+description: 현재 응답을 받지 않는 양식입니다.
+---
+<section class="status-page">
+  <div data-variants="state">
+    <div data-when="closed">
+      <div class="icon" aria-hidden="true">🔒</div>
+      <h1>Responses closed</h1>
+      <p>양식 응답이 마감되었습니다.<br>Please contact the form owner if you need help. (<a href="mailto:{{email}}">{{email}}</a>)</p>
+    </div>
+    <div data-when="*">
+      <div class="icon" aria-hidden="true">⏳</div>
+      <h1>Responses unavailable</h1>
+      <p>The form may not have started or may be temporarily closed.<br>Please check again later.</p>
+    </div>
+    <div class="btn-row"><a class="btn btn-primary" href="{{root}}index.html">Return to site home</a></div>
+  </div>
+</section>

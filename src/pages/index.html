@@ -1,126 +1,192 @@
 ---
 nav: home
-bodyClass: home
-scripts: data
+bodyClass: has-floating-cta
+intro: true
 ---
-<section class="hero" data-hero>
-  <div class="hero-sticky">
-    {{art:glow}}
-    {{art:burst}}
-    <div class="wrap hero-content">
-      <p class="eyebrow hero-after">Venture Studio for Startup &amp; Corporates</p>
-      <h1 class="hero-title" data-hero-title>We build new ventures<br>with <span class="slot" data-typer data-words="corporations,entrepreneurs,opportunities,innovations"><span class="typed" data-typed>entrepreneurs</span><i class="caret" aria-hidden="true"></i></span></h1>
-      <div class="hero-meta hero-after">
-        <p class="lead">[[새로운 사업을 설계하고 성장 단계까지 이끄는 벤처 빌딩 파트너||A Venture Building Partner Designing and Guiding New Businesses to Growth]]</p>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1><span class="nw">막막한 아이디에이션,</span><br><em><span class="nw">더 이상 혼자</span> <span class="nw">고민하지 마세요</span></em></h1>
+      <p class="hero-lead">수많은 비즈니스 아이디어가 카드 안에 있습니다. 인사이트가 담긴 카드를 조합해 빠르게 발상하고, AI의 힘으로 예상치 못한 방향으로 확장해보세요.</p>
+      <div class="btn-row">
+        <a class="btn btn-soft" href="{{root}}guide/index.html">자세한 기능 알아보기 →</a>
       </div>
     </div>
-    <div class="scroll-cue" aria-hidden="true">Scroll</div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="deck-card c1"><span class="tag t-target">Target</span><span class="icon">🧑‍💻</span><div><h3>MZ세대</h3><p>디지털 네이티브 세대의 소비 패턴</p></div></div>
+      <div class="deck-card c2"><span class="tag t-tech">Tech</span><span class="icon">🤖</span><div><h3>생성형 AI</h3><p>텍스트·이미지를 만들어내는 AI 기술</p></div></div>
+      <div class="deck-card c3"><span class="tag t-revenue">Revenue</span><span class="icon">🔁</span><div><h3>구독 모델</h3><p>반복 결제로 만드는 안정적 수익</p></div></div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section" id="overview">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Overview</span>
+      <h2>한 눈에 알아보기</h2>
+      <p>카드 탐색부터 아이디어 생성, 고도화까지. 세 단계로 비즈니스 아이디어를 완성합니다.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card feature reveal">
+        <span class="emoji" aria-hidden="true">🃏</span>
+        <h3>카드 탐색</h3><span class="en">Ideation Card</span>
+        <p>타겟, 기술, 트렌드, 수익모델 등 <span class="mark">비즈니스 아이디어 발상</span>에 최적화되어 있는 다양한 타입의 카드를 탐색합니다.</p>
+      </article>
+      <article class="card feature reveal">
+        <span class="emoji" aria-hidden="true">💡</span>
+        <h3>아이디어 생성</h3><span class="en">Generate Idea</span>
+        <p>특별한 인사이트를 주는 카드들을 모아 조합한 뒤 AI를 활용해 <span class="mark">새로운 아이디어</span>로 생성해보세요.</p>
+      </article>
+      <article class="card feature reveal">
+        <span class="emoji" aria-hidden="true">🪛</span>
+        <h3>아이디어 고도화</h3><span class="en">Develop Idea</span>
+        <p><span class="mark">비즈니스 템플릿</span>을 활용해 아이디어를 논리적으로 구조화하고 사업화 가능성을 고려한 방향으로 고도화해보세요.</p>
+      </article>
+    </div>
   </div>
 </section>
 
-<section class="section ruled journey-sec">
-  <div class="wrap">
-    <div class="center-head reveal">
-      <p class="eyebrow">Journey &amp; Vision</p>
-      <h2 class="h-xl"><span class="ko">더인벤션랩은 8년간의 오픈이노베이션 역량을 토대로,<br>Venture Studio로서 새로운 비즈니스와 성장 기회를 설계합니다.</span><span class="en">Based on 8 years of Open Innovation leadership, The Invention Lab designs new businesses and growth opportunities as a Venture Studio.</span></h2>
+<section class="section section-alt" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>복잡하지 않아요.<br>누구나 아이디어를 만들 수 있어요!</h2>
     </div>
-
-    <div class="tl-years reveal" aria-label="TIL’s Journey, 2017 to present">
-      <span>2017</span><i></i><span class="tl-label">TIL’s Journey</span><i></i><span>Present</span>
+    <div class="bento">
+      <a class="b-tile b1 c-blue reveal" href="{{root}}guide/cards.html">
+        <div class="b-vis v-deck" aria-hidden="true">
+          <span class="mini-card m1"><i class="tag t-target">Target</i>🧑‍💻<b>MZ세대</b></span>
+          <span class="mini-card m2"><i class="tag t-tech">Tech</i>🤖<b>생성형 AI</b></span>
+          <span class="mini-card m3"><i class="tag t-trend">Trend</i>🌱<b>친환경</b></span>
+        </div>
+        <div class="b-txt"><span class="b-num">01</span><h3>카드 살펴보기</h3><p>테마·타겟·트렌드·기술 등 6가지 카테고리의 인사이트 카드를 둘러봐요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="b-tile b-wide b2 c-pink reveal" href="{{root}}guide/card-deck.html">
+        <div class="b-vis v-toggle" aria-hidden="true"><span class="toggle"><span class="knob">♥</span></span></div>
+        <div class="b-txt"><span class="b-num">02</span><h3>카드덱 저장하기</h3><p>눈에 띄는 카드는 하트를 눌러 나만의 덱에 담아요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="b-tile b-wide b3 c-white reveal" href="{{root}}guide/select-cards.html">
+        <div class="b-vis v-chips" aria-hidden="true"><span>＋ Target</span><span>＋ Tech</span><span class="on">✓ Revenue</span></div>
+        <div class="b-txt"><span class="b-num">03</span><h3>카드 선택하기</h3><p>3~10장을 직접 고르거나 AI에게 조합을 추천받아요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="b-tile b-wide b4 c-white reveal" href="{{root}}guide/generate-idea.html">
+        <div class="b-vis v-spark" aria-hidden="true"><span class="s1">✦</span><span class="s2">✦</span><span class="s3">✦</span><span class="bulb">💡</span></div>
+        <div class="b-txt"><span class="b-num">04</span><h3>아이디어 생성하기</h3><p>고른 카드 조합으로 AI가 새로운 비즈니스 아이디어를 제안해요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="b-tile b-wide b5 c-green reveal" href="{{root}}guide/archive-idea.html">
+        <div class="b-vis v-list" aria-hidden="true"><span><i>🔖</i>MZ 맞춤 구독 서비스</span><span><i>🔖</i>친환경 리필 스테이션</span><span><i>🔖</i>AI 헬스 코치</span></div>
+        <div class="b-txt"><span class="b-num">05</span><h3>아이디어 보관하기</h3><p>마음에 드는 아이디어는 북마크로 모아둬요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="b-tile b-wide b6 c-lilac reveal" href="{{root}}guide/develop-idea.html">
+        <div class="b-vis v-canvas" aria-hidden="true"><span class="lc-problem">Problem</span><span class="lc-solution">Solution</span><span class="lc-metrics">Key Metrics</span><span class="lc-uvp hl">Unique Value Proposition</span><span class="lc-unfair">Unfair Advantage</span><span class="lc-channels">Channels</span><span class="lc-segments">Customer Segments</span><span class="lc-cost">Cost Structure</span><span class="lc-revenue">Revenue Streams</span></div>
+        <div class="b-txt"><span class="b-num">06</span><h3>아이디어 구체화하기</h3><p>린 캔버스 등 6가지 비즈니스 템플릿으로 문제·해결책·수익구조를 정리해요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="b-tile b-wide b7 c-peach reveal" href="{{root}}guide/business-plan.html">
+        <div class="b-vis v-doc" aria-hidden="true">
+          <span class="doc"><b>사업계획서</b><i class="ln w90"></i><i class="ln w70"></i><i class="ln w80"></i><em>1. 문제 정의</em><i class="ln w60"></i><i class="ln w75"></i></span>
+          <span class="ai-note">🤖 AI 코멘트<br><small>시장 근거를 보강해보세요</small></span>
+          <span class="slide">IR Deck · 13p</span>
+        </div>
+        <div class="b-txt"><span class="b-num">07</span><h3>사업계획서 작성하기</h3><p>AI와 함께 사업계획서 초안을 쓰고, IR Deck까지 이어서 만들어요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
+      <a class="b-tile b8 c-goal reveal" href="{{root}}guide/my-idea-deck.html">
+        <span class="b-badge">목적지</span>
+        <div class="b-vis v-goal" aria-hidden="true"><span class="flag"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M6 21V3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M7 4h11l-2.6 4L18 12H7z" fill="currentColor"/></svg></span><span class="saved">✓ My Idea Deck에 저장됨</span></div>
+        <div class="b-txt"><span class="b-num">08</span><h3>아이디어 저장하기</h3><p>완성한 아이디어와 문서를 My Idea Deck에 저장하고 언제든 꺼내 써요</p></div>
+        <span class="b-go" aria-hidden="true">↗</span>
+      </a>
     </div>
-    <ol class="tl reveal d1">
-      <li><span class="node">01</span><h3>Open Innovation Leadership</h3><p>[[민간 대기업 및 중견기업의 스타트업 발굴부터 PoC, 성과 도출, 투자 연계까지 8년간의 실행 경험을 축적했습니다.||Accumulated 8 years of execution experience from startup scouting to PoC, result derivation, and investment linking for major corporations.]]</p></li>
-      <li><span class="node">02</span><h3>Startup Investments &amp; Accelerating</h3><p>[[초기 투자부터 성장 가속화와 후속 투자까지, 전주기 스타트업 투자·육성 경험을 보유하고 있습니다.||Possess full-lifecycle startup investment and incubation experience from early-stage to growth acceleration.]]</p></li>
-      <li><span class="node">03</span><h3>Corporate Company Building &amp; Spin-Off</h3><p>[[사내벤처 육성 및 스핀오프 프로젝트를 통한 독립 법인화 성공 사례를 다수 보유하고 있습니다.||Multiple success stories in corporate venture building and spin-off projects leading to independent legal entities.]]</p></li>
-    </ol>
-    <div class="converge reveal d2" aria-hidden="true"></div>
+    <p class="center" style="margin-top:40px"><a class="btn btn-soft" href="{{root}}guide/index.html">자세한 기능 알아보기</a></p>
+  </div>
+</section>
 
-    <div class="next-step reveal">
-      <span class="ns-label">Next Step</span>
-      <i class="ns-line" aria-hidden="true"></i>
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Plans</span>
+      <h2>가볍게 시작하고, 자유롭게 함께하세요!</h2>
     </div>
+    <div class="pricing">
+      <article class="plan reveal">
+        <div class="plan-name">🐥 Starter</div>
+        <p class="plan-desc">아이디어 여정을 가볍게 시작하세요</p>
+        <div class="plan-price">무료</div>
+        <p class="plan-note">&nbsp;</p>
+        <ul>
+          <li><span>아이디어 생성 횟수</span><span>최대 5회</span></li>
+          <li><span>비즈니스 템플릿</span><span class="no">✕</span></li>
+          <li><span>AI에게 질문하기 기능</span><span>최대 5회</span></li>
+          <li><span>실시간 고객 지원</span><span class="no">✕</span></li>
+          <li><span>기업 커스터마이징</span><span class="no">✕</span></li>
+        </ul>
+        <p class="target"><b>권장 대상</b> · 개인 이용자</p>
+        <a class="btn btn-ghost" href="{{root}}guide/index.html">사용 가이드 보기</a>
+      </article>
+      <article class="plan featured reveal">
+        <span class="badge">베타테스터 모집 중</span>
+        <div class="plan-name">🙍🏻‍♀️ Plus</div>
+        <p class="plan-desc">7일 동안 모든 기능을 무제한으로</p>
+        <div class="plan-price">무료</div>
+        <p class="plan-note">*베타테스터 신청 시 권한 제공, 사용 피드백 필수</p>
+        <ul>
+          <li><span>아이디어 생성 횟수</span><span>무제한</span></li>
+          <li><span>비즈니스 템플릿</span><span>6개</span></li>
+          <li><span>AI에게 질문하기 기능</span><span>무제한</span></li>
+          <li><span>실시간 고객 지원</span><span class="yes">✓</span></li>
+          <li><span>기업 커스터마이징</span><span class="no">✕</span></li>
+        </ul>
+        <p class="target"><b>권장 대상</b> · 예비 창업자 / 스타트업 / 기업 / 전문가</p>
+      </article>
+      <article class="plan reveal">
+        <div class="plan-name">🫅🏻 Pro</div>
+        <p class="plan-desc">비즈니스를 위한 완전한 자유</p>
+        <div class="plan-price">문의 후 안내</div>
+        <p class="plan-note">&nbsp;</p>
+        <ul>
+          <li><span>아이디어 생성 횟수</span><span>무제한</span></li>
+          <li><span>비즈니스 템플릿</span><span>6개</span></li>
+          <li><span>AI에게 질문하기 기능</span><span>무제한</span></li>
+          <li><span>실시간 고객 지원</span><span class="yes">✓</span></li>
+          <li><span>기업 커스터마이징</span><span class="yes">✓</span></li>
+        </ul>
+        <p class="target"><b>권장 대상</b> · 예비 창업자 / 스타트업 / 기업 / 전문가</p>
+        <a class="btn btn-ghost" href="{{root}}program.html#program-inquiry">도입 문의하기</a>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <div class="ns-card reveal">
-      <p class="eyebrow">The Next Chapter · Venture Studio Model</p>
-      <h2 class="h-xl">Venture Studio for Corporates</h2>
-      <p class="lead">[[급변하는 AI 기술과 기업 환경 변화에 대응하기 위해, 기존의 오픈이노베이션을 넘어선 벤처 스튜디오로 진화합니다.||To respond to rapidly changing AI technologies and corporate environments, we are evolving beyond traditional Open Innovation into a Venture Studio.]]</p>
-      <div class="pair">
-        <div><h3>AI-Driven</h3><p>[[AI가 촉진하는 변화에 맞춘 혁신적 벤처 모델||Innovative models tailored to AI-driven shifts]]</p></div>
-        <div><h3>New Business</h3><p>[[스타트업 육성 역량을 기업 비즈니스와 연결||Linking startup growth capabilities to corporate business]]</p></div>
+<section class="feedback-band">
+  <div class="container center reveal">
+    <h2>카드부터 기능까지,<br>여러분의 피드백이 필요해요!</h2>
+    <p>더 좋은 인벤션덱AI를 함께 만들어주세요. 작은 의견도 큰 도움이 됩니다.</p>
+    <div class="feedback-btns">
+      <a class="btn btn-light" href="{{root}}feedback/index.html#tab-card-error">🔬 카드 오류 제보하기</a>
+      <a class="btn btn-light" href="{{root}}feedback/index.html#tab-app-error">🔭 인벤션덱AI 오류 제보하기</a>
+      <a class="btn btn-light" href="{{root}}feedback/opinion.html">📢 새로운 기능 제안하기</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="card reveal" style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding:40px">
+      <div style="max-width:640px">
+        <h2 style="font-size:1.6rem">비즈니스 제휴, 추가 프로그램에 대한<br>논의가 필요하신가요?</h2>
+        <p class="muted" style="margin:0">다양한 형태의 파트너십과 피드백을 환영합니다. 우측의 버튼을 통해 언제든지 연락주세요!</p>
       </div>
-      <p class="ns-link"><a class="link-arrow" href="{{root}}capabilities/venture-studio.html">Discover Venture Studio Model</a></p>
+      <a class="btn btn-primary" href="{{root}}program.html#program-inquiry">문의하기</a>
     </div>
   </div>
 </section>
 
-<section class="section ruled">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="eyebrow">Capabilities</p>
-        <h2 class="h-xl">What We Do</h2>
-      </div>
-      <p class="lead">[[더인벤션랩은 시장의 기회를 발견하고, 실행 가능한 비즈니스로 발전시키며, 지속적인 성장과 확장을 가능하게 하는 스타트업을 만듭니다.||The Invention Lab discovers market opportunities, develops them into executable businesses, and builds ventures capable of sustainable growth.]]</p>
-    </div>
-    <div class="grid g3 reveal d1">
-      <a class="cell card" href="{{root}}capabilities/new-biz-design.html">
-        <span class="label">01 · From Insight to Business</span>
-        <h3>New Business Design</h3>
-        <p>[[시장 기회를 정밀하게 분석하고, 검증 가능한 방향으로 디자인합니다.||Analyzing market opportunities and designing them in verifiable directions.]]</p>
-        <ul class="ticks">
-          <li>[[신규BM 발굴을 위한 데이터 인사이트 기반 리서치||Data-driven research for new BM discovery]]</li>
-          <li>[[내부 자체 AI Agent를 이용한 신사업 구체화||New business realization using in-house AI Agents]]</li>
-          <li>[[기업형 벤처스튜디오 모델 기획과 설계||Planning &amp; design of corporate venture studios]]</li>
-        </ul>
-        <span class="more">[[자세히 보기||Learn more]]</span>
-      </a>
-      <a class="cell card" href="{{root}}capabilities/venture-building.html">
-        <span class="label">02 · From Strategy to Scalable Growth</span>
-        <h3>Venture Scale-up &amp; MGT</h3>
-        <p>[[사업의 실행 기반을 구축하고, 지속 가능한 성장 구조와 투자 스케일업을 만들어갑니다.||Building execution foundations and creating sustainable growth structures.]]</p>
-        <ul class="ticks">
-          <li>[[TIPS/서울형TIPS/LIPS 연계형 초기 투자운용||Seed investment linked with TIPS/LIPS]]</li>
-          <li>[[CVC형 프로젝트/블라인드 펀드 기획과 운용||CVC-style projects and fund management]]</li>
-          <li>[[내부 벤처스튜디오 기획 및 인큐베이션||In-house venture studio incubation]]</li>
-        </ul>
-        <span class="more">[[자세히 보기||Learn more]]</span>
-      </a>
-      <a class="cell card" href="{{root}}capabilities/strategic-partnership.html">
-        <span class="label">03 · From OI to Strategic Network</span>
-        <h3>Strategic Partnership</h3>
-        <p>[[벤처가 성장할 수 있도록 외부 생태계를 설계하고 확장합니다.||Designing and expanding external ecosystems for venture growth.]]</p>
-        <ul class="ticks">
-          <li>[[기업형 벤처스튜디오 및 OI 프로젝트 기획·운영||Corporate Venture Studio &amp; OI Project Planning]]</li>
-          <li>[[FINEDEAL 기반 딜소싱 및 인프라 구축||Building Deal Sourcing &amp; Infra via FINEDEAL]]</li>
-          <li>[[글로벌 거점 기반 OI 및 시장 확장 연계||Global OI &amp; Market Expansion via Nodes]]</li>
-        </ul>
-        <span class="more">[[자세히 보기||Learn more]]</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section ruled">
-  <div class="wrap core">
-    <div class="reveal">
-      <p class="eyebrow">Core Elements</p>
-      <h2 class="h-xl">How We Do</h2>
-      <p class="lead" style="margin-top:28px"><span class="ko">더인벤션랩은 우연이 아닌 구조와 과정으로 스타트업을 만듭니다.<br>Studio Core Platform을 기반으로 기업과 창업자를 위한 새로운 사업을 정교한 프로세스로 설계하고 실행합니다.</span><span class="en">The Invention Lab builds ventures through structure and process, not chance. We design and execute new businesses for corporations and founders through our Studio Core Platform.</span></p>
-    </div>
-    <div class="reveal d1">{{art:core}}</div>
-  </div>
-</section>
-
-<section class="section ruled">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="h-xl">Featured Venture<br>Studio Cases</h2>
-      <a class="link-arrow head-link" href="{{root}}cases/index.html">See All</a>
-    </div>
-    <div class="grid g3 reveal d1" data-vs-cases data-limit="3">
-      <a class="card" href="{{root}}cases/index.html"><span class="tag">F&amp;B</span><h3>[[앙호두||Anghodu]]</h3><p>[[해외진출향 로컬 F&amp;B 프랜차이즈 개발||Development of local F&amp;B franchise for overseas expansion]]</p><span class="more">[[상세 보기||View Case]]</span></a>
-      <a class="card" href="{{root}}cases/index.html"><span class="tag">Mobility/Autotech/Fintech</span><h3>[[오케이쎄||OKXE]]</h3><p>[[베트남 1위 중고오토바이 및 전기 오토바이 중개-판매 마켓플레이스||Vietnam's leading marketplace for used motorcycles and electric motorcycles brokerage and sales.]]</p><span class="more">[[상세 보기||View Case]]</span></a>
-      <a class="card" href="{{root}}cases/index.html"><span class="tag">B2B/SaaS</span><h3>[[자라소프트||JARASOFT]]</h3><p>[[글로벌 시장에서 떠오르는 실시간 얼굴/사물 마스킹 AI SaaS, ‘블러미’||Blurry, a real-time face/object masking AI SaaS emerging in the global market]]</p><span class="more">[[상세 보기||View Case]]</span></a>
-    </div>
-  </div>
-</section>
+<a class="floating-cta" href="https://app.inventiondeck.kr/" target="_blank" rel="noopener">바로가기 <span aria-hidden="true">→</span></a>
