@@ -80,6 +80,52 @@
     var cue = hero.querySelector('.scroll-cue');
     if (burst) requestAnimationFrame(function () { burst.classList.add('in'); });
 
+    // 'We build new ventures with ______' — 빈칸에 키워드가 타이핑되듯 쓰였다 지워진다(스크롤을 시작하면 시작).
+    var slot = hero.querySelector('[data-typer]');
+    var typed = slot && slot.querySelector('[data-typed]');
+    var sizeSlot = function () {};
+    if (slot && typed) {
+      var words = slot.getAttribute('data-words').split(',');
+      sizeSlot = function () {
+        var probe = document.createElement('span');
+        probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap';
+        slot.appendChild(probe);
+        var w = 0;
+        words.forEach(function (wd) { probe.textContent = wd; w = Math.max(w, probe.getBoundingClientRect().width); });
+        probe.remove();
+        slot.style.width = Math.ceil(w + 4) + 'px';
+      };
+      sizeSlot();
+      if (reduceMotion) {
+        typed.textContent = words[1] || words[0];
+      } else {
+        typed.textContent = '';
+        var wi = 0, ci = 0, deleting = false, started = false;
+        var tick = function () {
+          var word = words[wi];
+          slot.classList.add('typing');
+          if (!deleting) {
+            ci++;
+            typed.textContent = word.slice(0, ci);
+            if (ci === word.length) { deleting = true; slot.classList.remove('typing'); return setTimeout(tick, 1700); }
+            return setTimeout(tick, 70 + Math.random() * 60);
+          }
+          ci--;
+          typed.textContent = word.slice(0, ci);
+          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; slot.classList.remove('typing'); return setTimeout(tick, 380); }
+          setTimeout(tick, 38);
+        };
+        var begin = function () {
+          if (started || window.scrollY < 4) return;
+          started = true;
+          window.removeEventListener('scroll', begin);
+          setTimeout(tick, 150);
+        };
+        window.addEventListener('scroll', begin, { passive: true });
+        begin();
+      }
+    }
+
     if (!reduceMotion && title) {
       hero.classList.add('is-live');
       var start = { x: 0, y: 0, s: 1 };
@@ -87,6 +133,7 @@
       var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
 
       var measure = function () {
+        sizeSlot();
         title.style.transform = 'none';
         // 줄바꿈된 제목은 상자보다 글자 폭이 좁으므로 실제 글자 영역을 기준으로 가운데를 잡는다.
         var range = document.createRange();

@@ -131,4 +131,23 @@ function core() {
   return svg('0 0 560 560', `<circle ${P} class="lf" cx="280" cy="280" r="210"/>${links}<circle ${P} cx="280" cy="280" r="96"/><circle ${P} class="lf" cx="280" cy="280" r="104"/><text class="t-core" x="280" y="262" text-anchor="middle">STUDIO</text><text class="t-core" x="280" y="286" text-anchor="middle">CORE</text><text class="t-core" x="280" y="310" text-anchor="middle">PLATFORM</text>${n}`, 'core-diagram');
 }
 
-export const art = { burst, orbit, globe, network, steps, venn, factory, rise, lines, meet, journey, core };
+// 홈 인트로 배경: 떠다니는 붉은 빛 (큰 번짐 + 작은 불씨). 움직임은 CSS 애니메이션.
+function glow() {
+  const rnd = rand(11);
+  const pct = (n) => `${Math.round(n * 1000) / 10}%`;
+  const px = (n) => `${Math.round(n)}px`;
+  const items = [];
+  const add = (cls, size, dur) => {
+    const v = [
+      `--x:${pct(0.05 + rnd() * 0.9)}`, `--y:${pct(0.08 + rnd() * 0.84)}`, `--s:${px(size)}`,
+      `--d:${(dur + rnd() * dur * 0.6).toFixed(1)}s`, `--delay:-${(rnd() * dur).toFixed(1)}s`,
+      ...['a', 'b', 'c'].flatMap((k) => [`--${k}x:${px((rnd() - 0.5) * (cls === 'blob' ? 520 : 760))}`, `--${k}y:${px((rnd() - 0.5) * (cls === 'blob' ? 360 : 520))}`]),
+    ];
+    items.push(`<i class="${cls}" style="${v.join(';')}"></i>`);
+  };
+  for (let i = 0; i < 5; i++) add('blob', 220 + rnd() * 260, 16);
+  for (let i = 0; i < 12; i++) add('spark', 4 + rnd() * 6, 9);
+  return `<div class="hero-glow" aria-hidden="true">${items.join('')}</div>`;
+}
+
+export const art = { glow, burst, orbit, globe, network, steps, venn, factory, rise, lines, meet, journey, core };
