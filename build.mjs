@@ -202,7 +202,9 @@ function layout({ meta, body, rel }) {
 <meta name="twitter:image" content="${SITE_URL}/assets/img/og-image.png">
 <link rel="canonical" href="${SITE_URL}${cleanPath('/' + href)}">
 <meta name="theme-color" content="#f0002d">
-<link rel="icon" href="{{root}}assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{root}}assets/img/favicon.png" type="image/png" sizes="36x36">
+<link rel="shortcut icon" href="{{root}}favicon.ico">
+<link rel="apple-touch-icon" href="{{root}}assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="{{root}}assets/css/style.css">
 <script src="{{root}}assets/js/config.js" defer></script>
@@ -227,6 +229,7 @@ async function build() {
   await rm(OUT, { recursive: true, force: true });
   await mkdir(OUT, { recursive: true });
   await cp(path.join(SRC, 'assets'), path.join(OUT, 'assets'), { recursive: true });
+  await cp(path.join(SRC, 'assets', 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 
   const files = await walk(PAGES);
   for (const file of files) {
