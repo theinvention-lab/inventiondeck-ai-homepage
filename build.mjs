@@ -8,6 +8,7 @@
 //   {{art:이름}}        src/art.mjs 의 선 일러스트(SVG)
 import { readFile, writeFile, mkdir, readdir, cp, rm } from 'node:fs/promises';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { site, nav, links } from './src/site.mjs';
 import { art } from './src/art.mjs';
@@ -21,6 +22,16 @@ const SITE_URL = (process.env.SITE_URL
 const SRC = path.join(ROOT, 'src');
 const PAGES = path.join(SRC, 'pages');
 const OUT = path.join(ROOT, 'dist');
+
+// 배포할 때마다 브라우저가 새 CSS/JS 를 받도록 파일 내용 해시를 ?v= 로 붙인다.
+const VERSION = {};
+async function versionAssets() {
+  for (const f of ['css/style.css', 'js/config.js', 'js/main.js', 'js/data.js']) {
+    const buf = await readFile(path.join(SRC, 'assets', f));
+    VERSION[f] = createHash('sha1').update(buf).digest('hex').slice(0, 8);
+  }
+}
+const asset = (f) => `{{root}}assets/${f}?v=${VERSION[f]}`;
 
 async function walk(dir) {
   const out = [];
@@ -168,11 +179,11 @@ function layout({ meta, body, rel }) {
 <link rel="shortcut icon" href="{{root}}favicon.ico">
 <link rel="apple-touch-icon" href="{{root}}assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="{{root}}assets/css/style.css">
+<link rel="stylesheet" href="${asset('css/style.css')}">
 ${LANG_HEAD}
-<script src="{{root}}assets/js/config.js" defer></script>
-<script src="{{root}}assets/js/main.js" defer></script>
-${scripts.includes('data') ? '<script src="{{root}}assets/js/data.js" defer></script>' : ''}
+<script src="${asset('js/config.js')}" defer></script>
+<script src="${asset('js/main.js')}" defer></script>
+${scripts.includes('data') ? `<script src="${asset('js/data.js')}" defer></script>` : ''}
 </head>
 <body class="${meta.bodyClass || ''}">
 ${header(meta.nav)}
@@ -207,6 +218,7 @@ async function build() {
   await cp(path.join(SRC, 'assets'), path.join(OUT, 'assets'), { recursive: true });
   await cp(path.join(SRC, 'assets', 'favicon.ico'), path.join(OUT, 'favicon.ico'));
 
+  await versionAssets();
   const files = await walk(PAGES);
   for (const file of files) {
     const rel = path.relative(PAGES, file);
